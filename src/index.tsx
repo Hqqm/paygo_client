@@ -2,11 +2,18 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import { App } from "./App";
+import { ThemeManager } from "ThemeManager";
 
 const root = document.getElementById("root");
 
 const render = () => {
-  if (root) ReactDOM.render(<App />, root);
+  if (root)
+    ReactDOM.render(
+      <ThemeManager>
+        <App />
+      </ThemeManager>,
+      root
+    );
 };
 
 if (module.hot) {
