@@ -1,22 +1,22 @@
 import * as React from "react";
-import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import { hot } from "react-hot-loader";
-import { backgroundColor, textColor } from "./lib/theme";
-import { useTheme } from "ThemeManager";
-
-const Wrapper = styled.div`
-  background-color: ${backgroundColor};
-  color: ${textColor};
-`;
+import { GlobalStyles } from "@lib/globalStyles";
+import { lightTheme, darkTheme } from "@lib/themes";
+import { useThemeMode } from "@lib/useDarkMode";
 
 export const App: React.FC<{}> = hot(module)(() => {
-  const theme = useTheme();
+  const [theme, toggleTheme, componentMounted] = useThemeMode("dark");
+  const currentTheme = theme === "light" ? lightTheme : darkTheme;
+
+  if (!componentMounted) {
+    return <div />;
+  }
 
   return (
-    <ThemeProvider theme={{ mode: theme.mode }}>
-      <Wrapper>hiiiiiii</Wrapper>
-      <button onClick={() => theme.toggle()}>toggle theme</button>
+    <ThemeProvider theme={currentTheme}>
+      <GlobalStyles />
+      <button onClick={toggleTheme}>toggle theme</button>
     </ThemeProvider>
   );
 });
