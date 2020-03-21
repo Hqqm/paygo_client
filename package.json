@@ -55,6 +55,7 @@
     "react-hook-form": "^5.1.1",
     "react-redux": "^7.2.0",
     "styled-components": "^5.0.1",
+    "styled-normalize": "^8.0.7",
     "uuid": "^7.0.2"
   }
 }

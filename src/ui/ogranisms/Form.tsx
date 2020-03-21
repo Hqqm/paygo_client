@@ -17,11 +17,10 @@ export const Form = ({ children, onSubmit }: FormProps) => (
 const FormWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
   height: 100%;
 
-  @media (max-width: 700px) {
+  @media (max-width: 500px) {
     display: block;
     background: #3e3e3e;
   }
@@ -33,7 +32,7 @@ const FormContainer = styled.div`
 
 const FormStyled = styled.form`
   display: grid;
-  max-width: 500px;
+  max-width: 450px;
   margin: 0 auto;
   grid-template-columns: 1fr;
   grid-gap: 10px;

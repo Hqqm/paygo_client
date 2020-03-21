@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ThemeProvider } from "styled-components";
+import { Normalize } from "styled-normalize";
 import { hot } from "react-hot-loader";
 import { GlobalStyles } from "@lib/globalStyles";
 import { lightTheme, darkTheme } from "@lib/themes";
