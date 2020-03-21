@@ -2,56 +2,64 @@ import * as React from "react";
 import styled from "styled-components";
 
 type FormProps = {
-  title?: string;
-  btnText: string;
   children: React.ReactNode;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 };
 
-export const Form = ({ title, btnText, children, onSubmit }: FormProps) => (
-  <FormContainer>
-    <FormStyled onSubmit={onSubmit}>
-      <H2>{title}</H2>
-      {children}
-      <Button type="submit">{btnText}</Button>
-    </FormStyled>
-  </FormContainer>
+export const Form = ({ children, onSubmit }: FormProps) => (
+  <FormWrapper>
+    <FormContainer>
+      <FormStyled onSubmit={onSubmit}>{children}</FormStyled>
+    </FormContainer>
+  </FormWrapper>
 );
 
-const FormContainer = styled.div`
+const FormWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   height: 100%;
-`;
 
-const FormStyled = styled.form`
-  display: flex;
-  flex-direction: column;
-  padding: 40px 20px;
-  border-radius: 20px;
-  background: #3e3e3e;
-
-  & > :last-child {
-    margin-top: 15px;
+  @media (max-width: 700px) {
+    display: block;
+    background: #3e3e3e;
   }
 `;
 
-const H2 = styled.h2`
-  margin-top: 5px;
-  text-transform: capitalize;
+const FormContainer = styled.div`
+  width: 100%;
 `;
 
-const Button = styled.button`
-  background: #fff;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+const FormStyled = styled.form`
+  display: grid;
+  max-width: 500px;
+  margin: 0 auto;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  padding: 2.5rem 1.5rem;
+  border-radius: 20px;
+  background: #3e3e3e;
+  font-size: calc(14px + 0.4vw);
 
-  &:hover {
-    background: #9262fd;
-    color: #fff;
+  & > h2 {
+    font-size: calc(14px + 1.5vw);
+    text-align: center;
+  }
+
+  & > button {
+    font-size: calc(14px + 0.4vw);
+    width: 100%;
+    margin: 0.5em 0;
+  }
+
+  @media (min-width: 1800px) {
+    & > h2 {
+      font-size: 40px;
+    }
+    & > button {
+      font-size: 18px;
+    }
+    font-size: 18px;
   }
 `;

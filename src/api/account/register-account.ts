@@ -43,6 +43,6 @@ const checkSignUpErrors = async (response: Response) => {
       throw new Error("Ошибка соединения с сервером");
     if (errMsg.includes("duplicate key"))
       throw new Error("Данный пользователь уже существует");
-    else throw new Error(response.statusText);
+    else throw new Error("Произошла неизвестная ошибка, повторите позже");
   }
 };

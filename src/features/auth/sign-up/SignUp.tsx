@@ -7,6 +7,8 @@ import { Input } from "@ui/molecules/Input";
 import { Form } from "@ui/ogranisms/Form";
 import { AppState } from "store";
 import styled from "styled-components";
+import { H2 } from "@ui/atoms/headers";
+import { Button } from "@ui/atoms/buttons";
 
 type FormData = {
   email: string;
@@ -26,7 +28,8 @@ export const SignUp: React.FC = () => {
   });
 
   return (
-    <Form title="регистрация" btnText="зарегистироваться" onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit}>
+      <H2>регистрация</H2>
       <Input
         name="email"
         type="email"
@@ -48,7 +51,8 @@ export const SignUp: React.FC = () => {
         errors={errors.password}
         register={register({ required: true })}
       />
-      <ErrorsContainer>{signUpErrors}</ErrorsContainer>
+      {signUpErrors && <ErrorsContainer>{signUpErrors}</ErrorsContainer>}
+      <Button type="submit">зарегистироваться</Button>
     </Form>
   );
 };

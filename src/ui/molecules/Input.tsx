@@ -32,7 +32,8 @@ export const Input = ({
 );
 
 const StyledInput = styled.input`
-  padding: 10px;
+  padding: 0.5em;
+  font-size: 0.9em;
   border: none;
   border-radius: 5px;
 `;
@@ -40,5 +41,5 @@ const StyledInput = styled.input`
 const ContainerInput = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 5px 0;
+  margin-bottom: 0.2em;
 `;
