@@ -5,7 +5,7 @@ import { hot } from "react-hot-loader";
 import { GlobalStyles } from "@lib/globalStyles";
 import { lightTheme, darkTheme } from "@lib/themes";
 import { useThemeMode } from "@lib/useDarkMode";
-import { SignUp } from "@features/auth/sign-up/SignUp";
+import { SignUpPage } from "@features/auth/sign-up/SignUpPage";
 
 export const App: React.FC<{}> = hot(module)(() => {
   const [theme, toggleTheme, componentMounted] = useThemeMode("dark");
@@ -18,7 +18,8 @@ export const App: React.FC<{}> = hot(module)(() => {
   return (
     <ThemeProvider theme={currentTheme}>
       <GlobalStyles />
-      <SignUp />
+      <Normalize />
+      <SignUpPage />
       <button onClick={toggleTheme}>toggle theme</button>
     </ThemeProvider>
   );

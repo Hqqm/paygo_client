@@ -7,24 +7,10 @@ type FormProps = {
 };
 
 export const Form = ({ children, onSubmit }: FormProps) => (
-  <FormWrapper>
-    <FormContainer>
-      <FormStyled onSubmit={onSubmit}>{children}</FormStyled>
-    </FormContainer>
-  </FormWrapper>
+  <FormContainer>
+    <FormStyled onSubmit={onSubmit}>{children}</FormStyled>
+  </FormContainer>
 );
-
-const FormWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  height: 100%;
-
-  @media (max-width: 500px) {
-    display: block;
-    background: #3e3e3e;
-  }
-`;
 
 const FormContainer = styled.div`
   width: 100%;
