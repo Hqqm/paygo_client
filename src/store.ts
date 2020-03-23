@@ -5,9 +5,13 @@ import {
   Action
 } from "@reduxjs/toolkit";
 
-import { reducer } from "@features/auth/sign-up/sign-up-slice";
+import { reducer as signUpReducer } from "@features/auth/sign-up/sign-up-slice";
+import { reducer as themeReducer } from "@features/toggler-theme/toggler-theme-slice";
 
-const rootReducer = combineReducers({ signUp: reducer });
+const rootReducer = combineReducers({
+  signUp: signUpReducer,
+  theme: themeReducer
+});
 
 export const store = configureStore({
   reducer: rootReducer,

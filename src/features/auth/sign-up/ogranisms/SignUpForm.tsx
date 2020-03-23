@@ -1,12 +1,12 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { createAccount } from "api/account/register-account";
-import { v4 as uuidV4 } from "uuid";
-import { Form } from "@ui/ogranisms/Form";
-import { H2, Button, ErrorsContainer } from "@ui/atoms";
-import { Input } from "@ui/molecules";
 import { AppState } from "store";
+import { v4 as uuidV4 } from "uuid";
+import { H2, Button, ErrorsContainer } from "@ui/atoms";
+import { Form } from "@ui/ogranisms/Form";
+import { Input } from "@ui/molecules";
+import { createAccount } from "@features/auth/sign-up/services/register-account-api";
 
 type FormData = {
   email: string;
@@ -47,7 +47,7 @@ export const SignUpForm = () => {
         register={register({ required: true })}
       />
       {signUpErrors && <ErrorsContainer>{signUpErrors}</ErrorsContainer>}
-      <Button type="submit">зарегистироваться</Button>
+      <Button type="submit">зарегистрироваться</Button>
     </Form>
   );
 };
