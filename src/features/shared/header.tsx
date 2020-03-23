@@ -2,25 +2,23 @@ import * as React from "react";
 import styled from "styled-components";
 import { TogglerTheme } from "@features/toggler-theme/toggler-theme";
 
-export const Header = () => {
-  return (
-    <WrapperHeader>
-      <Link href="/">лого</Link>
-      <NavBar>
-        <Ul>
-          <Li>
-            <Link href="/">зарегистрироваться</Link>
-          </Li>
-          &nbsp;
-          <Li>
-            <Link href="/">войти</Link>
-          </Li>
-        </Ul>
-      </NavBar>
-      <TogglerTheme />
-    </WrapperHeader>
-  );
-};
+export const Header = () => (
+  <WrapperHeader>
+    <Link href="/">лого</Link>
+    <NavBar>
+      <Ul>
+        <Li>
+          <Link href="/">зарегистрироваться</Link>
+        </Li>
+        &nbsp;
+        <Li>
+          <Link href="/">войти</Link>
+        </Li>
+      </Ul>
+    </NavBar>
+    <TogglerTheme />
+  </WrapperHeader>
+);
 
 const WrapperHeader = styled.header`
   display: flex;
@@ -47,4 +45,8 @@ const Li = styled.li`
 const Link = styled.a`
   color: #fff;
   padding: 1em;
+  text-decoration: none;
+  &:hover {
+    color: #9262fd;
+  }
 `;

@@ -1,2 +1,2 @@
-export { Input } from "./Input";
-export { Modal } from "./Modal";
+export { Input } from "./input";
+export { Modal } from "./modal";

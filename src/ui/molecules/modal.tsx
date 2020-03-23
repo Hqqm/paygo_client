@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import styled from "styled-components";
-import { Button } from "../atoms/Buttons";
+import { Button } from "../atoms/buttons";
 
 type ModalProps = {
   isOpen: boolean;

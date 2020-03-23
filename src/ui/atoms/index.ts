@@ -1,3 +1,3 @@
-export { Button } from "./Buttons";
-export { ErrorsContainer } from "./Errors";
-export { H2 } from "./Text";
+export { Button } from "./buttons";
+export { ErrorsContainer } from "./errors";
+export { H2 } from "./text";

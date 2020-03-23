@@ -1,9 +1,10 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-
-import { App } from "./App";
+import { Router } from "react-router-dom";
+import { history } from "@lib/history";
 import { store } from "./store";
+import { App } from "./app";
 
 const root = document.getElementById("root");
 
@@ -11,14 +12,16 @@ const render = () => {
   if (root)
     ReactDOM.render(
       <Provider store={store}>
-        <App />
+        <Router history={history}>
+          <App />
+        </Router>
       </Provider>,
       root
     );
 };
 
 if (module.hot) {
-  module.hot.accept("./App", function() {
+  module.hot.accept("./app", function() {
     render();
   });
 }

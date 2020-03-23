@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const toggleThemeSlice = createSlice({
+const togglerThemeSlice = createSlice({
   name: "toggleTheme",
   initialState: {
     mode: "light"
@@ -18,4 +18,4 @@ const toggleThemeSlice = createSlice({
 export const {
   actions: { setThemeInLocalStorage, setTheme },
   reducer
-} = toggleThemeSlice;
+} = togglerThemeSlice;

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "store";
 import { v4 as uuidV4 } from "uuid";
 import { H2, Button, ErrorsContainer } from "@ui/atoms";
-import { Form } from "@ui/ogranisms/Form";
+import { Form } from "@ui/ogranisms/form";
 import { Input } from "@ui/molecules";
 import { createAccount } from "@features/auth/sign-up/services/register-account-api";
 
