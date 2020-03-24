@@ -7,25 +7,10 @@ type FormProps = {
 };
 
 export const Form = ({ children, onSubmit }: FormProps) => (
-  <FormWrapper>
-    <FormContainer>
-      <FormStyled onSubmit={onSubmit}>{children}</FormStyled>
-    </FormContainer>
-  </FormWrapper>
+  <FormContainer>
+    <FormStyled onSubmit={onSubmit}>{children}</FormStyled>
+  </FormContainer>
 );
-
-const FormWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100%;
-
-  @media (max-width: 700px) {
-    display: block;
-    background: #3e3e3e;
-  }
-`;
 
 const FormContainer = styled.div`
   width: 100%;
@@ -33,7 +18,7 @@ const FormContainer = styled.div`
 
 const FormStyled = styled.form`
   display: grid;
-  max-width: 500px;
+  max-width: 450px;
   margin: 0 auto;
   grid-template-columns: 1fr;
   grid-gap: 10px;

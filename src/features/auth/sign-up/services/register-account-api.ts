@@ -1,11 +1,12 @@
-import { AppDispatch, AppThunk } from "store";
+import { AppDispatch } from "store";
+import { AppThunk } from "rootReducer";
 import {
   registeringAccount,
   registeredAccount,
   registeringAccountError
 } from "@features/auth/sign-up/sign-up-slice";
 
-type Account = {
+export type Account = {
   id: string;
   email: string;
   login: string;

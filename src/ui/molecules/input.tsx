@@ -1,10 +1,11 @@
 import * as React from "react";
 import styled from "styled-components";
 import { CustomElement } from "react-hook-form";
+import { ErrorsContainer } from "@ui/atoms";
 
 type InputProps = {
   name: string;
-  labelName: string;
+  label: string;
   type: string;
   errors: any;
   register: (
@@ -17,17 +18,11 @@ type InputProps = {
   ) => void;
 };
 
-export const Input = ({
-  name,
-  type,
-  labelName,
-  errors,
-  register
-}: InputProps) => (
+export const Input = ({ name, type, label, errors, register }: InputProps) => (
   <ContainerInput>
-    <label htmlFor={name}>{labelName}</label>
+    <label htmlFor={name}>{label}</label>
     <StyledInput name={name} type={type} ref={register} />
-    {errors && `${name} is required`}
+    {errors && <ErrorsContainer>{`${name} is required`}</ErrorsContainer>}
   </ContainerInput>
 );
 

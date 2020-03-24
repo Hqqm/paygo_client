@@ -1,24 +1,22 @@
 import * as React from "react";
-import { ThemeProvider } from "styled-components";
 import { hot } from "react-hot-loader";
+import { useSelector } from "react-redux";
+import { ThemeProvider } from "styled-components";
+import { Normalize } from "styled-normalize";
 import { GlobalStyles } from "@lib/globalStyles";
 import { lightTheme, darkTheme } from "@lib/themes";
-import { useThemeMode } from "@lib/useDarkMode";
-import { SignUp } from "@features/auth/sign-up/SignUp";
+import { AppState } from "rootReducer";
+import { Routes } from "routes";
 
 export const App: React.FC<{}> = hot(module)(() => {
-  const [theme, toggleTheme, componentMounted] = useThemeMode("dark");
+  const theme = useSelector((state: AppState) => state.theme.mode);
   const currentTheme = theme === "light" ? lightTheme : darkTheme;
-
-  if (!componentMounted) {
-    return <div />;
-  }
 
   return (
     <ThemeProvider theme={currentTheme}>
       <GlobalStyles />
-      <SignUp />
-      <button onClick={toggleTheme}>toggle theme</button>
+      <Normalize />
+      <Routes />
     </ThemeProvider>
   );
 });
