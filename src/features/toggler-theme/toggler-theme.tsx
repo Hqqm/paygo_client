@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "store";
+import { AppState } from "rootReducer";
 import { setTheme, setThemeInLocalStorage } from "./toggler-theme-slice";
 
 export const TogglerTheme = () => {

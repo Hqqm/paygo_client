@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 import { Normalize } from "styled-normalize";
 import { GlobalStyles } from "@lib/globalStyles";
 import { lightTheme, darkTheme } from "@lib/themes";
-import { AppState } from "store";
+import { AppState } from "rootReducer";
 import { Routes } from "routes";
 
 export const App: React.FC<{}> = hot(module)(() => {

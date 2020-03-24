@@ -1,35 +1,31 @@
 import * as React from "react";
 import styled from "styled-components";
 
-type SignUpTemplateProps = {
+type AuthTemplateProps = {
   header: React.ReactNode;
   form: React.ReactNode;
   modal: React.ReactNode;
 };
 
-export const SignUpTemplate = ({
-  header,
-  form,
-  modal
-}: SignUpTemplateProps) => (
-  <SignUpWrapper>
+export const AuthTemplate = ({ header, form, modal }: AuthTemplateProps) => (
+  <AuthContainer>
     {header}
-    {form && <SignUpFormWrapper>{form}</SignUpFormWrapper>}
+    {form && <AuthFormContainer>{form}</AuthFormContainer>}
     {modal}
-  </SignUpWrapper>
+  </AuthContainer>
 );
 
-const SignUpWrapper = styled.div`
-  display: block;
+const AuthContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   height: 100vh;
 `;
 
-const SignUpFormWrapper = styled.div`
+const AuthFormContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: calc(100vh - 51px);
-
+  flex-grow: 1;
   @media (max-width: 500px) {
     display: block;
     background: #3e3e3e;

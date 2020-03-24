@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { AppState } from "store";
+import { AppState } from "rootReducer";
 import { Modal } from "@ui/molecules";
 
 export const SignUpModal = () => {

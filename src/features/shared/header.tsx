@@ -1,18 +1,19 @@
 import * as React from "react";
 import styled from "styled-components";
+import { Link } from "@ui/atoms";
 import { TogglerTheme } from "@features/toggler-theme/toggler-theme";
 
 export const Header = () => (
   <WrapperHeader>
-    <Link href="/">лого</Link>
+    <Link to="/">лого</Link>
     <NavBar>
       <Ul>
         <Li>
-          <Link href="/">зарегистрироваться</Link>
+          <Link to="/">зарегистрироваться</Link>
         </Li>
         &nbsp;
         <Li>
-          <Link href="/">войти</Link>
+          <Link to="/signIn">войти</Link>
         </Li>
       </Ul>
     </NavBar>
@@ -40,13 +41,4 @@ const Ul = styled.ul`
 const Li = styled.li`
   list-style: none;
   display: inline-block;
-`;
-
-const Link = styled.a`
-  color: #fff;
-  padding: 1em;
-  text-decoration: none;
-  &:hover {
-    color: #9262fd;
-  }
 `;

@@ -3,9 +3,10 @@ import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { Router } from "react-router-dom";
 import { history } from "@lib/history";
-import { store } from "./store";
-import { App } from "./app";
+import { configureAppStore } from "./store";
+import { App } from "app";
 
+const store = configureAppStore();
 const root = document.getElementById("root");
 
 const render = () => {

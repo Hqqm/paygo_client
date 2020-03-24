@@ -8,6 +8,7 @@ const getDevServer = () => ({
     }
   },
   contentBase: path.join(__dirname, "..", "src/public"),
+  historyApiFallback: true,
   compress: true,
   port: 9000,
   hot: true,

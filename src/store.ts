@@ -1,23 +1,18 @@
-import {
-  configureStore,
-  combineReducers,
-  ThunkAction,
-  Action
-} from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import { rootReducer } from "rootReducer";
 
-import { reducer as signUpReducer } from "@features/auth/sign-up/sign-up-slice";
-import { reducer as themeReducer } from "@features/toggler-theme/toggler-theme-slice";
+export const configureAppStore = () => {
+  const store = configureStore({
+    reducer: rootReducer,
+    devTools: process.env.NODE_ENV !== "production"
+  });
 
-const rootReducer = combineReducers({
-  signUp: signUpReducer,
-  theme: themeReducer
-});
+  if (process.env.NODE_ENV !== "production" && module.hot) {
+    module.hot.accept("./rootReducer", () => store.replaceReducer(rootReducer));
+  }
 
-export const store = configureStore({
-  reducer: rootReducer,
-  devTools: process.env.NODE_ENV !== "production"
-});
+  return store;
+};
 
-export type AppDispatch = typeof store.dispatch;
-export type AppState = ReturnType<typeof rootReducer>;
-export type AppThunk = ThunkAction<void, AppState, unknown, Action<string>>;
+const dispatch = configureAppStore().dispatch;
+export type AppDispatch = typeof dispatch;
