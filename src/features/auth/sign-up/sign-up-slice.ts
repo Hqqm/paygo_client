@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const signUpSlice = createSlice({
   name: "signUp",
   initialState: {
-    account: null,
     fetchingState: "none",
     error: null
   },
@@ -11,9 +10,9 @@ const signUpSlice = createSlice({
     registeringAccount: state => {
       state.fetchingState = "requesting";
     },
-    registeredAccount: (state, action) => {
+    registeredAccount: state => {
       state.fetchingState = "success";
-      state.account = action.payload.account;
+      state.error = null;
     },
     registeringAccountError: (state, action) => {
       state.fetchingState = "fail";

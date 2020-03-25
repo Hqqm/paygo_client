@@ -1,11 +1,13 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "rootReducer";
+import { AppState } from "root-reducer";
 import { setTheme, setThemeInLocalStorage } from "./toggler-theme-slice";
 
 export const TogglerTheme = () => {
   React.useEffect(() => {
     const localTheme = window.localStorage.getItem("theme");
+    if (currentTheme === localTheme && localTheme !== null) return;
+
     const preferUserColorSchemeIsDark =
       window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches;

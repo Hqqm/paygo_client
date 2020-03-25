@@ -4,7 +4,7 @@ import styled from "styled-components";
 type AuthTemplateProps = {
   header: React.ReactNode;
   form: React.ReactNode;
-  modal: React.ReactNode;
+  modal?: React.ReactNode;
 };
 
 export const AuthTemplate = ({ header, form, modal }: AuthTemplateProps) => (

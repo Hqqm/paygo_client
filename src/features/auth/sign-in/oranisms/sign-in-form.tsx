@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { H2, Button, ErrorsContainer } from "@ui/atoms";
 import { Form } from "@ui/ogranisms/form";
 import { Input } from "@ui/molecules";
-import { SignInFormData, sigInIntoAccount } from "../services/sign-in-api";
-import { AppState } from "rootReducer";
+import { SignInFormData, signInIntoAccount } from "../services/sign-in-api";
+import { AppState } from "root-reducer";
 
 export const SignInForm = () => {
   const { register, handleSubmit, errors } = useForm<SignInFormData>();
@@ -13,7 +13,7 @@ export const SignInForm = () => {
   const dispatch = useDispatch();
 
   const onSubmit = handleSubmit(({ login, password }) => {
-    dispatch(sigInIntoAccount({ login, password }));
+    dispatch(signInIntoAccount({ login, password }));
   });
 
   return (
@@ -33,7 +33,6 @@ export const SignInForm = () => {
         errors={errors.password}
         register={register({ required: true })}
       />
-
       <Button type="submit">войти</Button>
       {signInErrors && <ErrorsContainer>{signInErrors}</ErrorsContainer>}
     </Form>

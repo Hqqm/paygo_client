@@ -2,7 +2,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidV4 } from "uuid";
-import { AppState } from "rootReducer";
+import { AppState } from "root-reducer";
 import { H2, Button, ErrorsContainer } from "@ui/atoms";
 import { Form } from "@ui/ogranisms/form";
 import { Input } from "@ui/molecules";

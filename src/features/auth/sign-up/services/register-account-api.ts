@@ -1,5 +1,5 @@
 import { AppDispatch } from "store";
-import { AppThunk } from "rootReducer";
+import { AppThunk } from "root-reducer";
 import {
   registeringAccount,
   registeredAccount,
@@ -20,15 +20,14 @@ export const createAccount = (account: Account): AppThunk => async (
   try {
     const response = await createAccountRequest(account);
     await checkSignUpErrors(response);
-    account = await response.json();
-    dispatch(registeredAccount({ account }));
+    dispatch(registeredAccount());
   } catch (err) {
     dispatch(registeringAccountError({ error: err.message }));
   }
 };
 
 const createAccountRequest = async (account: Account) => {
-  return fetch("/api/auth/signUp", {
+  return fetch("/server/auth/signUp", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

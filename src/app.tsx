@@ -3,10 +3,11 @@ import { hot } from "react-hot-loader";
 import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { Normalize } from "styled-normalize";
+import { AppState } from "root-reducer";
+import { Routes } from "routes";
 import { GlobalStyles } from "@lib/globalStyles";
 import { lightTheme, darkTheme } from "@lib/themes";
-import { AppState } from "rootReducer";
-import { Routes } from "routes";
+import { AccountLoader } from "@features/shared/account-loader/account-loader";
 
 export const App: React.FC<{}> = hot(module)(() => {
   const theme = useSelector((state: AppState) => state.theme.mode);
@@ -16,7 +17,9 @@ export const App: React.FC<{}> = hot(module)(() => {
     <ThemeProvider theme={currentTheme}>
       <GlobalStyles />
       <Normalize />
-      <Routes />
+      <AccountLoader>
+        <Routes />
+      </AccountLoader>
     </ThemeProvider>
   );
 });

@@ -1,27 +1,65 @@
 import * as React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Link } from "@ui/atoms";
 import { TogglerTheme } from "@features/toggler-theme/toggler-theme";
+import { exitFromAccount } from "./account-loader/services/utils";
+import { isAccountAuthenticatedSelector } from "./account-loader/selectors/account-loader-selectors";
 
-export const Header = () => (
-  <WrapperHeader>
-    <Link to="/">лого</Link>
+export const Header = () => {
+  const isAccountAuthenticated = useSelector(isAccountAuthenticatedSelector);
+
+  return (
+    <StyledHeader>
+      <Link to="/">лого</Link>
+      {isAccountAuthenticated ? <AuthenticatedNavbar /> : <GuestNavbar />}
+      <TogglerTheme />
+    </StyledHeader>
+  );
+};
+
+const AuthenticatedNavbar = () => {
+  const dispatch = useDispatch();
+  return (
     <NavBar>
       <Ul>
         <Li>
-          <Link to="/">зарегистрироваться</Link>
+          <Link to="/">перевод</Link>
         </Li>
         &nbsp;
         <Li>
-          <Link to="/signIn">войти</Link>
+          <Link to="/">история переводов</Link>
+        </Li>
+        &nbsp;
+        <Li>
+          <Link to="/">пополнить баланс</Link>
+        </Li>
+        &nbsp;
+        <Li>
+          <Link to="/" onClick={() => exitFromAccount(dispatch)}>
+            выйти
+          </Link>
         </Li>
       </Ul>
     </NavBar>
-    <TogglerTheme />
-  </WrapperHeader>
+  );
+};
+
+const GuestNavbar = () => (
+  <NavBar>
+    <Ul>
+      <Li>
+        <Link to="/signUp">зарегистрироваться</Link>
+      </Li>
+      &nbsp;
+      <Li>
+        <Link to="/signIn">войти</Link>
+      </Li>
+    </Ul>
+  </NavBar>
 );
 
-const WrapperHeader = styled.header`
+const StyledHeader = styled.header`
   display: flex;
   padding: 0 2rem;
   flex-wrap: wrap;
