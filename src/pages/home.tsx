@@ -21,5 +21,5 @@ const HomeContainer = styled.div`
   justify-content: center;
   align-items: center;
   font-size: calc(14px + 2vw);
-  color: ${({ theme }) => theme.text};
+  color: #f9a1bc;
 `;

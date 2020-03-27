@@ -6,6 +6,7 @@ import { Form } from "@ui/ogranisms/form";
 import { Input } from "@ui/molecules";
 import { SignInFormData, signInIntoAccount } from "../services/sign-in-api";
 import { AppState } from "root-reducer";
+import { Stack } from "@ui/layouts/Stack";
 
 export const SignInForm = () => {
   const { register, handleSubmit, errors } = useForm<SignInFormData>();
@@ -18,23 +19,26 @@ export const SignInForm = () => {
 
   return (
     <Form onSubmit={onSubmit}>
-      <H2>вход</H2>
-      <Input
-        name="login"
-        type="text"
-        label="логин"
-        errors={errors.login}
-        register={register({ required: true })}
-      />
-      <Input
-        name="password"
-        type="password"
-        label="пароль"
-        errors={errors.password}
-        register={register({ required: true })}
-      />
-      <Button type="submit">войти</Button>
-      {signInErrors && <ErrorsContainer>{signInErrors}</ErrorsContainer>}
+      <Stack small>
+        <H2 align="center">вход</H2>
+        <Input
+          name="login"
+          type="text"
+          label="логин"
+          errors={errors.login}
+          register={register({ required: true })}
+        />
+
+        <Input
+          name="password"
+          type="password"
+          label="пароль"
+          errors={errors.password}
+          register={register({ required: true })}
+        />
+        <Button type="submit">войти</Button>
+        {signInErrors && <ErrorsContainer>{signInErrors}</ErrorsContainer>}
+      </Stack>
     </Form>
   );
 };

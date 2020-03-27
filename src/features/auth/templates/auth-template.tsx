@@ -26,8 +26,4 @@ const AuthFormContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   flex-grow: 1;
-  @media (max-width: 500px) {
-    display: block;
-    background: #3e3e3e;
-  }
 `;

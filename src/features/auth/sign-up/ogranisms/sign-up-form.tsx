@@ -10,6 +10,7 @@ import {
   createAccount,
   Account
 } from "@features/auth/sign-up/services/register-account-api";
+import { Stack } from "@ui/layouts/Stack";
 
 type FormData = {
   email: string;
@@ -29,30 +30,32 @@ export const SignUpForm = () => {
 
   return (
     <Form onSubmit={onSubmit}>
-      <H2>регистрация</H2>
-      <Input
-        name="email"
-        type="email"
-        label="почта"
-        errors={errors.email}
-        register={register({ required: true })}
-      />
-      <Input
-        name="login"
-        type="text"
-        label="логин"
-        errors={errors.login}
-        register={register({ required: true })}
-      />
-      <Input
-        name="password"
-        type="password"
-        label="пароль"
-        errors={errors.password}
-        register={register({ required: true })}
-      />
-      <Button type="submit">зарегистрироваться</Button>
-      {signUpErrors && <ErrorsContainer>{signUpErrors}</ErrorsContainer>}
+      <Stack small>
+        <H2 align="center">регистрация</H2>
+        <Input
+          name="email"
+          type="email"
+          label="почта"
+          errors={errors.email}
+          register={register({ required: true })}
+        />
+        <Input
+          name="login"
+          type="text"
+          label="логин"
+          errors={errors.login}
+          register={register({ required: true })}
+        />
+        <Input
+          name="password"
+          type="password"
+          label="пароль"
+          errors={errors.password}
+          register={register({ required: true })}
+        />
+        <Button type="submit">зарегистрироваться</Button>
+        {signUpErrors && <ErrorsContainer>{signUpErrors}</ErrorsContainer>}
+      </Stack>
     </Form>
   );
 };

@@ -20,21 +20,27 @@ type InputProps = {
 
 export const Input = ({ name, type, label, errors, register }: InputProps) => (
   <ContainerInput>
-    <label htmlFor={name}>{label}</label>
+    <Label htmlFor={name}>{label}</Label>
     <StyledInput name={name} type={type} ref={register} />
     {errors && <ErrorsContainer>{`${name} is required`}</ErrorsContainer>}
   </ContainerInput>
 );
 
 const StyledInput = styled.input`
-  padding: 0.5em;
-  font-size: 0.9em;
+  width: 100%;
+  padding: 0.5rem;
   border: none;
   border-radius: 5px;
+  font-size: 1rem;
+  font-family: inherit;
+  line-height: inherit;
 `;
 
 const ContainerInput = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 0.2em;
+`;
+
+const Label = styled.label`
+  font-weight: 600;
 `;

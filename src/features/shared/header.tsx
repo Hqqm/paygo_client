@@ -64,7 +64,7 @@ const StyledHeader = styled.header`
   padding: 0 2rem;
   flex-wrap: wrap;
   align-items: center;
-  background: #3e3e3e;
+  background: #625772;
 `;
 
 const NavBar = styled.nav`
