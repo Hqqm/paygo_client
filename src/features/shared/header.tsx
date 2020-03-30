@@ -64,7 +64,7 @@ const StyledHeader = styled.header`
   padding: 0 2rem;
   flex-wrap: wrap;
   align-items: center;
-  background: #625772;
+  background: ${({ theme }) => theme.colors.primary};
 `;
 
 const NavBar = styled.nav`

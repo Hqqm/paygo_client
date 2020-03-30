@@ -1,11 +1,21 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Header } from "@features/shared/header";
+import { Box } from "@ui/layouts/box";
+import { H2 } from "@ui/atoms";
 
 export const Home = () => (
   <HomeWrapper>
     <Header />
-    <HomeContainer>Home</HomeContainer>
+    <HomeContainer>
+      <Box>
+        <H2>paygo</H2>
+        <H2>paygo</H2>
+        <H2>paygo</H2>
+        <H2>paygo</H2>
+        <H2>paygo</H2>
+      </Box>
+    </HomeContainer>
   </HomeWrapper>
 );
 

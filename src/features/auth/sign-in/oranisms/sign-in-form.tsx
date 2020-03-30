@@ -6,7 +6,8 @@ import { Form } from "@ui/ogranisms/form";
 import { Input } from "@ui/molecules";
 import { SignInFormData, signInIntoAccount } from "../services/sign-in-api";
 import { AppState } from "root-reducer";
-import { Stack } from "@ui/layouts/Stack";
+import { Stack } from "@ui/layouts/stack";
+import { Box } from "@ui/layouts/box";
 
 export const SignInForm = () => {
   const { register, handleSubmit, errors } = useForm<SignInFormData>();
@@ -20,7 +21,9 @@ export const SignInForm = () => {
   return (
     <Form onSubmit={onSubmit}>
       <Stack small>
-        <H2 align="center">вход</H2>
+        <Box pt={1}>
+          <H2 align="center">вход</H2>
+        </Box>
         <Input
           name="login"
           type="text"
@@ -28,7 +31,6 @@ export const SignInForm = () => {
           errors={errors.login}
           register={register({ required: true })}
         />
-
         <Input
           name="password"
           type="password"

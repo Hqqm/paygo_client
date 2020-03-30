@@ -6,11 +6,9 @@ import { AppState } from "root-reducer";
 import { H2, Button, ErrorsContainer } from "@ui/atoms";
 import { Form } from "@ui/ogranisms/form";
 import { Input } from "@ui/molecules";
-import {
-  createAccount,
-  Account
-} from "@features/auth/sign-up/services/register-account-api";
-import { Stack } from "@ui/layouts/Stack";
+import { createAccount, Account } from "@features/auth/sign-up/services/register-account-api";
+import { Stack } from "@ui/layouts/stack";
+import { Box } from "@ui/layouts/box";
 
 type FormData = {
   email: string;
@@ -31,7 +29,10 @@ export const SignUpForm = () => {
   return (
     <Form onSubmit={onSubmit}>
       <Stack small>
-        <H2 align="center">регистрация</H2>
+        <Box pt={1}>
+          <H2 align="center">регистрация</H2>
+        </Box>
+
         <Input
           name="email"
           type="email"

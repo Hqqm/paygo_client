@@ -25,5 +25,5 @@ export const Stack = styled.div<StackProps>`
       & * + * {
         margin-top: ${({ space }) => space};
       }
-    `}
+    `};
 `;

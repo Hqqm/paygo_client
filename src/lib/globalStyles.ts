@@ -12,8 +12,8 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background: ${({ theme }) => theme.body};
-    color: ${({ theme }) => theme.text};
+    background: ${({ theme }) => theme.colors.body};
+    color: ${({ theme }) => theme.colors.text};
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -21,5 +21,4 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     font-family: 'PT Sans', sans-serif;
     line-height: 1.5;
-    transition: all 0.3s linear;
   }`;

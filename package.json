@@ -24,6 +24,7 @@
     "@types/react-dom": "^16.8.5",
     "@types/react-redux": "^7.1.7",
     "@types/styled-components": "^5.0.1",
+    "@types/styled-system": "^5.1.9",
     "@types/styled-theming": "^2.2.2",
     "@types/uuid": "^7.0.2",
     "@types/webpack-env": "^1.14.0",
@@ -62,6 +63,7 @@
     "react-router-dom": "^5.1.2",
     "styled-components": "^5.0.1",
     "styled-normalize": "^8.0.7",
+    "styled-system": "^5.1.5",
     "uuid": "^7.0.2"
   }
 }
