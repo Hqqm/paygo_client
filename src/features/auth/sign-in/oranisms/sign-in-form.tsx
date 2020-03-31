@@ -1,17 +1,18 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { H2, Button, ErrorsContainer } from "@ui/atoms";
+import { H2, Button, Text } from "@ui/atoms";
 import { Form } from "@ui/ogranisms/form";
 import { Input } from "@ui/molecules";
 import { SignInFormData, signInIntoAccount } from "../services/sign-in-api";
-import { AppState } from "root-reducer";
 import { Stack } from "@ui/layouts/stack";
 import { Box } from "@ui/layouts/box";
+import { selectSignInErr, selectIsSignInRequesting } from "../selectors/sign-in-selectors";
 
 export const SignInForm = () => {
   const { register, handleSubmit, errors } = useForm<SignInFormData>();
-  const signInErrors = useSelector((state: AppState) => state.signIn.error);
+  const signInErrors = useSelector(selectSignInErr);
+  const isRequesting = useSelector(selectIsSignInRequesting);
   const dispatch = useDispatch();
 
   const onSubmit = handleSubmit(({ login, password }) => {
@@ -38,8 +39,14 @@ export const SignInForm = () => {
           errors={errors.password}
           register={register({ required: true })}
         />
-        <Button type="submit">войти</Button>
-        {signInErrors && <ErrorsContainer>{signInErrors}</ErrorsContainer>}
+        <Button type="submit" disabled={isRequesting}>
+          войти
+        </Button>
+        {signInErrors && (
+          <Text color="#ce0000" align="center">
+            {signInErrors}
+          </Text>
+        )}
       </Stack>
     </Form>
   );

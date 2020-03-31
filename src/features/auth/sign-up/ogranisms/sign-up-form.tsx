@@ -1,14 +1,16 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidV4 } from "uuid";
-import { AppState } from "root-reducer";
-import { H2, Button, ErrorsContainer } from "@ui/atoms";
+import { H2, Button, Text } from "@ui/atoms";
 import { Form } from "@ui/ogranisms/form";
 import { Input } from "@ui/molecules";
-import { createAccount, Account } from "@features/auth/sign-up/services/register-account-api";
 import { Stack } from "@ui/layouts/stack";
 import { Box } from "@ui/layouts/box";
+import {
+  useRegisterAccountRequest,
+  SignUpRequestState,
+  Account
+} from "@features/auth/sign-up/services/register-account-api";
 
 type FormData = {
   email: string;
@@ -18,12 +20,12 @@ type FormData = {
 
 export const SignUpForm = () => {
   const { register, handleSubmit, errors } = useForm<FormData>();
-  const signUpErrors = useSelector((state: AppState) => state.signUp.error);
-  const dispatch = useDispatch();
+  const [requestState, makeRequest] = useRegisterAccountRequest();
+  const isRequesting = requestState.fetchingState === "requesting";
 
   const onSubmit = handleSubmit(({ email, login, password }) => {
     const account: Account = { id: uuidV4(), email, login, password };
-    dispatch(createAccount(account));
+    makeRequest(account);
   });
 
   return (
@@ -32,7 +34,6 @@ export const SignUpForm = () => {
         <Box pt={1}>
           <H2 align="center">регистрация</H2>
         </Box>
-
         <Input
           name="email"
           type="email"
@@ -54,9 +55,29 @@ export const SignUpForm = () => {
           errors={errors.password}
           register={register({ required: true })}
         />
-        <Button type="submit">зарегистрироваться</Button>
-        {signUpErrors && <ErrorsContainer>{signUpErrors}</ErrorsContainer>}
+        <Button type="submit" disabled={isRequesting}>
+          зарегистрироваться
+        </Button>
+        {ResponseFromServer(requestState)}
       </Stack>
     </Form>
+  );
+};
+
+const ResponseFromServer = ({ fetchingState, responseErr }: SignUpRequestState) => {
+  if (fetchingState === "none" || fetchingState === "requesting") {
+    return null;
+  } else if (fetchingState === "fail") {
+    return (
+      <Text color="#ce0000" align="center">
+        {responseErr}
+      </Text>
+    );
+  }
+
+  return (
+    <Text color="#1e7100" align="center">
+      Регистрация прошла успешна
+    </Text>
   );
 };

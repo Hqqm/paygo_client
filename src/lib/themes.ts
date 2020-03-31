@@ -9,9 +9,10 @@ export const lightTheme: DefaultTheme = {
     primary: "#bf9fee"
   },
   space: {
-    small: "0.5rem",
-    medium: "1rem",
-    large: "2rem"
+    xss: "0.125rem",
+    xs: "0.5rem",
+    s: "1rem",
+    m: "2rem"
   }
 };
 
@@ -24,9 +25,10 @@ export const darkTheme: DefaultTheme = {
     primary: "#bf9fee"
   },
   space: {
-    small: "0.5rem",
-    medium: "1rem",
-    large: "2rem"
+    xss: "0.125rem",
+    xs: "0.5rem",
+    s: "1rem",
+    m: "2rem"
   }
 };
 

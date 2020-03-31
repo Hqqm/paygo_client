@@ -1,7 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
 import { CustomElement } from "react-hook-form";
-import { ErrorsContainer } from "@ui/atoms";
+import { Text } from "@ui/atoms";
+import { Box } from "@ui/layouts/box";
 
 type InputProps = {
   name: string;
@@ -15,9 +16,21 @@ type InputProps = {
 
 export const Input = ({ name, type, label, errors, register }: InputProps) => (
   <ContainerInput>
-    <Label htmlFor={name}>{label}</Label>
+    <Box pb={"xs"} pl={"xss"}>
+      <Box color="#000000" as="span">
+        <Label htmlFor={name}>
+          <ContainerLabelContent>{label}</ContainerLabelContent>
+        </Label>
+      </Box>
+    </Box>
+
     <StyledInput name={name} type={type} ref={register} />
-    {errors && <ErrorsContainer>{errors.type}</ErrorsContainer>}
+
+    {errors && (
+      <Box pt={"xs"} pl={"xss"}>
+        <Text color="#ce0000">{errors.type}</Text>
+      </Box>
+    )}
   </ContainerInput>
 );
 
@@ -25,15 +38,11 @@ const StyledInput = styled.input`
   width: 100%;
   background: ${({ theme }) => theme.colors.grey};
   padding: 0.5rem;
-  border: none;
+  border: 2px solid rgb(255, 255, 255);
   border-radius: 5px;
   font-size: 1.2rem;
   font-family: inherit;
   line-height: inherit;
-
-  &:hover {
-    border: 1px solid #866ec7;
-  }
 
   &:focus {
     border: 2px solid #866ec7;
@@ -48,5 +57,17 @@ const ContainerInput = styled.div`
 const Label = styled.label`
   font-size: 1.2rem;
   font-weight: 600;
-  color: #000000;
+`;
+
+const ContainerLabelContent = styled.span`
+  display: block;
+  padding-top: 1px;
+  transform: translateY(7px);
+
+  &&:before {
+    content: "";
+    display: block;
+    height: 0;
+    margin-top: -20px;
+  }
 `;

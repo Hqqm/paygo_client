@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { color, ColorProps } from "styled-system";
 
 type H2Props = {
   align?: string;
@@ -11,13 +12,31 @@ export const H2 = styled.h2<H2Props>`
   font-family: "Montserrat", sans-serif;
   text-transform: capitalize;
   text-align: ${({ align }) => align || "left"};
-  transform: translateY(9px);
+  transform: translateY(10px);
   color: #000000;
 
   &&:before {
     content: "";
     display: block;
     height: 0;
-    margin-top: -20px;
+    margin-top: -21px;
+  }
+`;
+
+type TextProps = {
+  align?: string;
+};
+
+export const Text = styled.div<ColorProps & TextProps>`
+  font-size: 1.1rem;
+  ${color};
+  text-align: ${({ align }) => align || "left"};
+  transform: translateY(6px);
+
+  &&:before {
+    content: "";
+    display: block;
+    height: 0;
+    margin-top: -18px;
   }
 `;
