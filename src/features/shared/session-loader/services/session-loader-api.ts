@@ -11,7 +11,7 @@ export const loadAccount = (): AppThunk => async (dispatch: AppDispatch) => {
     const account = (await response.json()) as Account;
     dispatch(loadedSession(account));
   } catch (err) {
-    dispatch(loadingSessionError(err.message));
+    dispatch(loadingSessionError(err.message as string));
   }
 };
 

@@ -1,4 +1,4 @@
-import { createSlice, CaseReducer, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, CaseReducer, PayloadAction, Action } from "@reduxjs/toolkit";
 
 export type Account = {
   id: string;
@@ -15,7 +15,7 @@ type State = {
   error: string | null;
 };
 
-const loadingSession: CaseReducer<State> = state => {
+const loadingSession: CaseReducer<State, Action<string>> = state => {
   state.fetchingState = "requesting";
 };
 
@@ -33,7 +33,7 @@ const loadingSessionError: CaseReducer<State, PayloadAction<string>> = (state, a
   state.error = action.payload;
 };
 
-const closedSession: CaseReducer<State> = state => {
+const closedSession: CaseReducer<State, Action<string>> = state => {
   state.fetchingState = "none";
   state.isAuthenticated = false;
   state.account = null;
