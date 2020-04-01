@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export type Account = {
+export type RegisterAccountData = {
   id: string;
   email: string;
   login: string;
@@ -14,7 +14,7 @@ export type SignUpRequestState = {
 
 export const useRegisterAccountRequest = (): [
   SignUpRequestState,
-  (account: Account) => Promise<void>
+  (account: RegisterAccountData) => Promise<void>
 ] => {
   const [state, setState] = React.useState<SignUpRequestState>({
     fetchingState: "none",
@@ -22,7 +22,7 @@ export const useRegisterAccountRequest = (): [
   });
 
   const makeRequest = React.useCallback(
-    async (account: Account) => {
+    async (account: RegisterAccountData) => {
       setState({ fetchingState: "requesting", responseErr: "" });
       try {
         const response = await createAccountRequest(account);
@@ -38,7 +38,7 @@ export const useRegisterAccountRequest = (): [
   return [state, makeRequest];
 };
 
-const createAccountRequest = async (account: Account) => {
+const createAccountRequest = async (account: RegisterAccountData) => {
   return fetch("/server/auth/signUp", {
     method: "POST",
     headers: {

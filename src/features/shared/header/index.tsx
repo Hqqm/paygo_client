@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { selectIsAccountAuthenticated } from "../session-loader/selectors";
+import { selectIsAccountAuthenticated, selectLogin } from "../session-loader/selectors";
 import { exitFromAccount } from "../session-loader/services/utils";
 import { Link } from "@ui/atoms";
 import { TogglerTheme } from "@features/toggler-theme/toggler-theme";
@@ -19,6 +19,7 @@ export const Header = () => {
 };
 
 const AuthenticatedNavbar = () => {
+  const login = useSelector(selectLogin);
   const dispatch = useDispatch();
   return (
     <NavBar>
@@ -33,6 +34,14 @@ const AuthenticatedNavbar = () => {
         &nbsp;
         <Li>
           <Link to="/">пополнить баланс</Link>
+        </Li>
+        &nbsp;
+        <Li>
+          <Link to="/">история переводов</Link>
+        </Li>
+        &nbsp;
+        <Li>
+          <Link to="/">{login}</Link>
         </Li>
         &nbsp;
         <Li>

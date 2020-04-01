@@ -1,43 +1,60 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, CaseReducer, PayloadAction } from "@reduxjs/toolkit";
 
-const session = createSlice({
+export type Account = {
+  id: string;
+  email: string;
+  login: string;
+  balance: BigInteger;
+  createAt: string;
+};
+
+type State = {
+  account: Account | null;
+  isAuthenticated: boolean;
+  fetchingState: "none" | "requesting" | "success" | "fail";
+  error: string | null;
+};
+
+const loadingSession: CaseReducer<State> = state => {
+  state.fetchingState = "requesting";
+};
+
+const loadedSession: CaseReducer<State, PayloadAction<Account>> = (state, action) => {
+  state.fetchingState = "success";
+  state.isAuthenticated = true;
+  state.error = null;
+  state.account = action.payload;
+};
+
+const loadingSessionError: CaseReducer<State, PayloadAction<string>> = (state, action) => {
+  state.fetchingState = "fail";
+  state.account = null;
+  state.isAuthenticated = false;
+  state.error = action.payload;
+};
+
+const closedSession: CaseReducer<State> = state => {
+  state.fetchingState = "none";
+  state.isAuthenticated = false;
+  state.account = null;
+};
+
+const initialState: State = {
+  account: null,
+  isAuthenticated: false,
+  fetchingState: "none",
+  error: null
+};
+
+export const session = createSlice({
   name: "session",
-  initialState: {
-    account: null,
-    isAuthenticated: false,
-    fetchingState: "none",
-    error: null
-  },
+  initialState,
   reducers: {
-    loadingSession: state => {
-      state.fetchingState = "requesting";
-    },
-    loadedSession: (state, action) => {
-      state.fetchingState = "success";
-      state.isAuthenticated = true;
-      state.error = null;
-      state.account = action.payload.account;
-    },
-    loadingSessionError: (state, action) => {
-      state.fetchingState = "fail";
-      state.account = null;
-      state.isAuthenticated = false;
-      state.error = action.payload.error;
-    },
-    closedSession: state => {
-      state.fetchingState = "none";
-      state.isAuthenticated = false;
-      state.account = null;
-    }
-  }
-});
-
-export const {
-  actions: {
     loadingSession,
     loadedSession,
     loadingSessionError,
     closedSession
-  },
-  reducer
-} = session;
+  }
+});
+
+export const { reducer } = session;

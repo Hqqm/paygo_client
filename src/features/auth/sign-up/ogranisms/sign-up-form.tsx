@@ -9,7 +9,7 @@ import { Box } from "@ui/layouts/box";
 import {
   useRegisterAccountRequest,
   SignUpRequestState,
-  Account
+  RegisterAccountData
 } from "@features/auth/sign-up/services/register-account-api";
 
 type FormData = {
@@ -24,7 +24,7 @@ export const SignUpForm = () => {
   const isRequesting = requestState.fetchingState === "requesting";
 
   const onSubmit = handleSubmit(({ email, login, password }) => {
-    const account: Account = { id: uuidV4(), email, login, password };
+    const account: RegisterAccountData = { id: uuidV4(), email, login, password };
     makeRequest(account);
   });
 
