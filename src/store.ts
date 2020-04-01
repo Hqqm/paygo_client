@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { rootReducer } from "rootReducer";
+import { rootReducer } from "root-reducer";
 
 export const configureAppStore = () => {
   const store = configureStore({
@@ -8,7 +8,9 @@ export const configureAppStore = () => {
   });
 
   if (process.env.NODE_ENV !== "production" && module.hot) {
-    module.hot.accept("./rootReducer", () => store.replaceReducer(rootReducer));
+    module.hot.accept("./root-reducer", () =>
+      store.replaceReducer(rootReducer)
+    );
   }
 
   return store;

@@ -4,30 +4,32 @@ import styled from "styled-components";
 type AuthTemplateProps = {
   header: React.ReactNode;
   form: React.ReactNode;
-  modal: React.ReactNode;
 };
 
-export const AuthTemplate = ({ header, form, modal }: AuthTemplateProps) => (
-  <AuthContainer>
+export const AuthTemplate = ({ header, form }: AuthTemplateProps) => (
+  <AuthWrapper>
     {header}
-    {form && <AuthFormContainer>{form}</AuthFormContainer>}
-    {modal}
-  </AuthContainer>
+    <AuthMainContainer>{form && <FormContainer>{form}</FormContainer>}</AuthMainContainer>
+  </AuthWrapper>
 );
 
-const AuthContainer = styled.div`
+const AuthWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
 `;
 
-const AuthFormContainer = styled.div`
+const AuthMainContainer = styled.main`
   display: flex;
   justify-content: center;
   flex-direction: column;
   flex-grow: 1;
+  background: ${({ theme }) => theme.colors.body};
+`;
+
+const FormContainer = styled.div`
+  width: 100%;
   @media (max-width: 500px) {
-    display: block;
-    background: #3e3e3e;
+    padding: 0 1rem;
   }
 `;

@@ -28,11 +28,12 @@ const ModalWrapper = styled.div`
   height: 100vh;
   width: 100%;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 0;
   left: 0;
-  justify-content: center;
-  align-items: center;
   background: #000000b0;
 `;
 
@@ -40,6 +41,4 @@ const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 300px;
-  width: 300px;
 `;

@@ -1,11 +1,11 @@
 import { combineReducers, ThunkAction, Action } from "@reduxjs/toolkit";
 
-import { reducer as signUpReducer } from "@features/auth/sign-up/sign-up-slice";
 import { reducer as signInReducer } from "@features/auth/sign-in/sign-in-slice";
+import { reducer as sessionReducer } from "@features/shared/session-loader/session-slice";
 import { reducer as themeReducer } from "@features/toggler-theme/toggler-theme-slice";
 
 export const rootReducer = combineReducers({
-  signUp: signUpReducer,
+  session: sessionReducer,
   signIn: signInReducer,
   theme: themeReducer
 });

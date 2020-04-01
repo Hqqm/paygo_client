@@ -1,33 +1,33 @@
-import { AppThunk } from "rootReducer";
+import { AppThunk } from "root-reducer";
+import { history } from "@lib/history";
 import { AppDispatch } from "store";
-import {
-  loggingIntoAccount,
-  loggingIntoAccountError,
-  loggedIntoAccount
-} from "../sign-in-slice";
+import { loggingIntoAccount, loggingIntoAccountError, loggedIntoAccount } from "../sign-in-slice";
+import { loadAccount } from "@features/shared/session-loader/services/session-loader-api";
 
 export type SignInFormData = {
   login: string;
   password: string;
 };
 
-export const sigInIntoAccount = ({
-  login,
-  password
-}: SignInFormData): AppThunk => async (dispatch: AppDispatch) => {
+export const signInIntoAccount = ({ login, password }: SignInFormData): AppThunk => async (
+  dispatch: AppDispatch
+) => {
   dispatch(loggingIntoAccount());
   try {
-    const reponse = await sigInIntoAccountRequest({ login, password });
+    const reponse = await signInIntoAccountRequest({ login, password });
     await checkSignInErrors(reponse);
-    const token = await reponse.json();
-    dispatch(loggedIntoAccount({ token }));
+    const data = await reponse.json();
+    localStorage.setItem("token", data.token);
+    dispatch(loggedIntoAccount({ token: data.token }));
+    dispatch(loadAccount());
+    history.push("/");
   } catch (err) {
     dispatch(loggingIntoAccountError({ error: err.message }));
   }
 };
 
-const sigInIntoAccountRequest = async (formData: SignInFormData) => {
-  return fetch("/api/auth/signIn", {
+const signInIntoAccountRequest = async (formData: SignInFormData) => {
+  return fetch("/server/auth/signIn", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
