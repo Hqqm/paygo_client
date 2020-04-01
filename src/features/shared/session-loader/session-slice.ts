@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const accountLoaderSlice = createSlice({
-  name: "AccountLoader",
+const session = createSlice({
+  name: "session",
   initialState: {
     account: null,
     isAuthenticated: false,
@@ -40,4 +40,4 @@ export const {
     closedSession
   },
   reducer
-} = accountLoaderSlice;
+} = session;

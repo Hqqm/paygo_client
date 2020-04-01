@@ -1,10 +1,6 @@
 import { AppThunk } from "root-reducer";
 import { AppDispatch } from "store";
-import {
-  loadingSession,
-  loadedSession,
-  loadingSessionError
-} from "../account-loader-slice";
+import { loadingSession, loadedSession, loadingSessionError } from "../session-slice";
 
 export const loadAccount = (): AppThunk => async (dispatch: AppDispatch) => {
   dispatch(loadingSession());

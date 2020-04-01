@@ -1,22 +1,17 @@
 import { AppThunk } from "root-reducer";
 import { history } from "@lib/history";
 import { AppDispatch } from "store";
-import {
-  loggingIntoAccount,
-  loggingIntoAccountError,
-  loggedIntoAccount
-} from "../sign-in-slice";
-import { loadAccount } from "@features/shared/account-loader/services/account-loader-api";
+import { loggingIntoAccount, loggingIntoAccountError, loggedIntoAccount } from "../sign-in-slice";
+import { loadAccount } from "@features/shared/session-loader/services/session-loader-api";
 
 export type SignInFormData = {
   login: string;
   password: string;
 };
 
-export const signInIntoAccount = ({
-  login,
-  password
-}: SignInFormData): AppThunk => async (dispatch: AppDispatch) => {
+export const signInIntoAccount = ({ login, password }: SignInFormData): AppThunk => async (
+  dispatch: AppDispatch
+) => {
   dispatch(loggingIntoAccount());
   try {
     const reponse = await signInIntoAccountRequest({ login, password });

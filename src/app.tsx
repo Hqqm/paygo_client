@@ -7,7 +7,7 @@ import { AppState } from "root-reducer";
 import { Routes } from "routes";
 import { GlobalStyles } from "@lib/globalStyles";
 import { lightTheme, darkTheme } from "@lib/themes";
-import { AccountLoader } from "@features/shared/account-loader/account-loader";
+import { SessionLoader } from "@features/shared/session-loader";
 
 export const App: React.FC<{}> = hot(module)(() => {
   const theme = useSelector((state: AppState) => state.theme.mode);
@@ -17,9 +17,9 @@ export const App: React.FC<{}> = hot(module)(() => {
     <ThemeProvider theme={currentTheme}>
       <GlobalStyles />
       <Normalize />
-      <AccountLoader>
+      <SessionLoader>
         <Routes />
-      </AccountLoader>
+      </SessionLoader>
     </ThemeProvider>
   );
 });

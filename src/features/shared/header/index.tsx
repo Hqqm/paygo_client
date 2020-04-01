@@ -1,13 +1,13 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import { selectIsAccountAuthenticated } from "../session-loader/selectors";
+import { exitFromAccount } from "../session-loader/services/utils";
 import { Link } from "@ui/atoms";
 import { TogglerTheme } from "@features/toggler-theme/toggler-theme";
-import { exitFromAccount } from "./account-loader/services/utils";
-import { isAccountAuthenticatedSelector } from "./account-loader/selectors/account-loader-selectors";
 
 export const Header = () => {
-  const isAccountAuthenticated = useSelector(isAccountAuthenticatedSelector);
+  const isAccountAuthenticated = useSelector(selectIsAccountAuthenticated);
 
   return (
     <StyledHeader>
