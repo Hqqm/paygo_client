@@ -1,12 +1,17 @@
 import * as React from "react";
 import { renderRoutes } from "react-router-config";
-import { Home, SignUpPage, SignInPage } from "pages";
+import { HomePage, SignUpPage, SignInPage, MoneyOperationsPage } from "pages";
 
 const routes = () => [
   {
     path: "/",
     exact: true,
-    component: Home
+    component: HomePage
+  },
+  {
+    path: "/moneyOperations",
+    exact: true,
+    component: MoneyOperationsPage
   },
   {
     path: "/signUp",

@@ -4,7 +4,7 @@ import { Header } from "@features/shared/header";
 import { Box } from "@ui/layouts/box";
 import { H2 } from "@ui/atoms";
 
-export const Home = () => (
+export const HomePage = () => (
   <HomeWrapper>
     <Header />
     <HomeContainer>

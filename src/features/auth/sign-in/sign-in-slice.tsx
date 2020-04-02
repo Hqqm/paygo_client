@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const signInSlice = createSlice({
   name: "signIn",
   initialState: {
-    token: localStorage.getItem("token"),
     fetchingState: "none",
     error: null
   },
@@ -11,28 +10,18 @@ const signInSlice = createSlice({
     loggingIntoAccount: state => {
       state.fetchingState = "requesting";
     },
-    loggedIntoAccount: (state, action) => {
+    loggedIntoAccount: state => {
       state.fetchingState = "success";
       state.error = null;
-      state.token = action.payload.token;
     },
     loggingIntoAccountError: (state, action) => {
       state.fetchingState = "fail";
       state.error = action.payload.error;
-    },
-    logout: state => {
-      state.fetchingState = "none";
-      state.token = null;
     }
   }
 });
 
 export const {
-  actions: {
-    loggingIntoAccount,
-    loggedIntoAccount,
-    loggingIntoAccountError,
-    logout
-  },
+  actions: { loggingIntoAccount, loggedIntoAccount, loggingIntoAccountError },
   reducer
 } = signInSlice;

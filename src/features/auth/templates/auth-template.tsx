@@ -9,7 +9,13 @@ type AuthTemplateProps = {
 export const AuthTemplate = ({ header, form }: AuthTemplateProps) => (
   <AuthWrapper>
     {header}
-    <AuthMainContainer>{form && <FormContainer>{form}</FormContainer>}</AuthMainContainer>
+    <AuthMainContainer>
+      {form && (
+        <FormContainer>
+          <FormContainer2>{form}</FormContainer2>
+        </FormContainer>
+      )}
+    </AuthMainContainer>
   </AuthWrapper>
 );
 
@@ -32,4 +38,15 @@ const FormContainer = styled.div`
   @media (max-width: 500px) {
     padding: 0 1rem;
   }
+`;
+
+const FormContainer2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  border-radius: 20px;
+  background: ${({ theme }) => theme.colors.white};
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 `;

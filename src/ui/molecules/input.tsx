@@ -8,13 +8,15 @@ type InputProps = {
   name: string;
   label: string;
   type: string;
+  inputmode?: string;
+  pattern?: string;
   errors: any;
   register: (
     ref: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | CustomElement | null
   ) => void;
 };
 
-export const Input = ({ name, type, label, errors, register }: InputProps) => (
+export const Input = ({ name, type, inputmode, pattern, label, errors, register }: InputProps) => (
   <ContainerInput>
     <Box pb={"xs"} pl={"xss"}>
       <Box color="#000000" as="span">
@@ -24,7 +26,7 @@ export const Input = ({ name, type, label, errors, register }: InputProps) => (
       </Box>
     </Box>
 
-    <StyledInput name={name} type={type} ref={register} />
+    <StyledInput name={name} type={type} ref={register} pattern={pattern} inputMode={inputmode} />
 
     {errors && (
       <Box pt={"xs"} pl={"xss"}>
@@ -47,6 +49,15 @@ const StyledInput = styled.input`
   &:focus {
     border: 2px solid #866ec7;
   }
+
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
+  &[type="number"]::-webkit-inner-spin-button,
+  &[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 const ContainerInput = styled.div`
@@ -55,8 +66,7 @@ const ContainerInput = styled.div`
 `;
 
 const Label = styled.label`
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1rem;
 `;
 
 const ContainerLabelContent = styled.span`

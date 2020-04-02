@@ -1,14 +1,13 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadAccount } from "./services/session-loader-api";
-import { selectToken } from "@features/auth/sign-in/selectors/sign-in-selectors";
-import { selectIsAccountAuthenticated } from "./selectors";
+import { loadAccount } from "./account-loader-api";
+import { selectIsAccountAuthenticated, selectToken } from "../shared/session/selectors";
 
-type SessionLoaderProps = {
+type AccountLoaderProps = {
   children: React.ReactElement;
 };
 
-export const SessionLoader: React.FC<SessionLoaderProps> = ({ children }) => {
+export const AccountLoader: React.FC<AccountLoaderProps> = ({ children }) => {
   React.useEffect(() => {
     dispatch(loadAccount());
   }, []);

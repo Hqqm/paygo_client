@@ -1,3 +1,4 @@
-export { Home } from "./home";
-export { SignInPage } from "./sign-in-page";
-export { SignUpPage } from "./sign-up-page";
+export { HomePage } from "./home";
+export { MoneyOperationsPage } from "./money-operations";
+export { SignInPage } from "./sign-in";
+export { SignUpPage } from "./sign-up";

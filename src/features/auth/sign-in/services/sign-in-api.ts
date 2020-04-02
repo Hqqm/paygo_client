@@ -2,7 +2,8 @@ import { AppThunk } from "root-reducer";
 import { history } from "@lib/history";
 import { AppDispatch } from "store";
 import { loggingIntoAccount, loggingIntoAccountError, loggedIntoAccount } from "../sign-in-slice";
-import { loadAccount } from "@features/shared/session-loader/services/session-loader-api";
+import { loadAccount } from "@features/account-loader/account-loader-api";
+import { createSession } from "@features/shared/session/slice";
 
 export type SignInFormData = {
   login: string;
@@ -17,8 +18,9 @@ export const signInIntoAccount = ({ login, password }: SignInFormData): AppThunk
     const reponse = await signInIntoAccountRequest({ login, password });
     await checkSignInErrors(reponse);
     const data = await reponse.json();
+    dispatch(loggedIntoAccount());
     localStorage.setItem("token", data.token);
-    dispatch(loggedIntoAccount({ token: data.token }));
+    dispatch(createSession(data.token));
     dispatch(loadAccount());
     history.push("/");
   } catch (err) {
