@@ -2,12 +2,13 @@ import * as React from "react";
 import styled from "styled-components";
 import { Header } from "@features/shared/header";
 import { ReplenishForm } from "@features/money-operations/replenish/ogranisms/replenish-form";
+import { TransferForm } from "@features/money-operations/transfer/ogranisms/transfer-form";
 
 export const MoneyOperationsPage = () => (
   <MoneyOperationsPageTempalte
     header={<Header />}
     sidebar={<ReplenishForm />}
-    main={<div>перевод</div>}
+    main={<TransferForm />}
   />
 );
 
@@ -20,14 +21,16 @@ type MoneyOperationsPageTempalteProps = {
 const MoneyOperationsPageTempalte = ({
   header,
   sidebar,
-  main
+  main,
 }: MoneyOperationsPageTempalteProps) => (
   <MoneyOperationsPageGrid>
     <HeaderArea>{header}</HeaderArea>
     <SidebarArea>
       <SidebarContainer>{sidebar}</SidebarContainer>
     </SidebarArea>
-    <MainArea>{main}</MainArea>
+    <MainArea>
+      <SidebarContainer>{main}</SidebarContainer>
+    </MainArea>
   </MoneyOperationsPageGrid>
 );
 

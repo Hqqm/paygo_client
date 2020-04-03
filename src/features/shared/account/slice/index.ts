@@ -12,10 +12,11 @@ type State = {
   entity: Account | null;
   fetchingState: "none" | "requesting" | "success" | "fail";
   replenishState: "none" | "requesting" | "success" | "fail";
+  transferState: "none" | "requesting" | "success" | "fail";
   err: string | null;
 };
 
-const loadAccountStartReducer: CaseReducer<State, Action<string>> = state => {
+const loadAccountStartReducer: CaseReducer<State, Action<string>> = (state) => {
   state.fetchingState = "requesting";
   state.err = null;
 };
@@ -31,7 +32,7 @@ const loadAccountFailureReducer: CaseReducer<State, PayloadAction<string>> = (st
   state.err = action.payload;
 };
 
-const replenishBalanceStartReducer: CaseReducer<State, Action<string>> = state => {
+const replenishBalanceStartReducer: CaseReducer<State, Action<string>> = (state) => {
   state.replenishState = "requesting";
 };
 
@@ -52,11 +53,28 @@ const replenishBalanceFailureReducer: CaseReducer<State, PayloadAction<string>> 
   state.err = action.payload;
 };
 
+const transferMoneyStartReducer: CaseReducer<State, Action<string>> = (state) => {
+  state.transferState = "requesting";
+  state.err = null;
+};
+
+const transferMoneySuccessReducer: CaseReducer<State, PayloadAction<number>> = (state, action) => {
+  state.transferState = "success";
+  state.err = null;
+  state.entity!.balance -= action.payload;
+};
+
+const transferMoneyFailureReducer: CaseReducer<State, PayloadAction<string>> = (state, action) => {
+  state.transferState = "fail";
+  state.err = action.payload;
+};
+
 const initialState: State = {
   entity: null,
   fetchingState: "none",
   replenishState: "none",
-  err: null
+  transferState: "none",
+  err: null,
 };
 
 const accountSlice = createSlice({
@@ -68,8 +86,11 @@ const accountSlice = createSlice({
     loadAccountFailure: loadAccountFailureReducer,
     replenishBalanceStart: replenishBalanceStartReducer,
     replenishBalanceSuccess: replenishBalanceSuccessReducer,
-    replenishBalanceFailure: replenishBalanceFailureReducer
-  }
+    replenishBalanceFailure: replenishBalanceFailureReducer,
+    transferMoneyStart: transferMoneyStartReducer,
+    transferMoneySuccess: transferMoneySuccessReducer,
+    transferMoneyFailure: transferMoneyFailureReducer,
+  },
 });
 
 export const {
@@ -80,6 +101,9 @@ export const {
     loadAccountFailure,
     replenishBalanceStart,
     replenishBalanceSuccess,
-    replenishBalanceFailure
-  }
+    replenishBalanceFailure,
+    transferMoneyStart,
+    transferMoneySuccess,
+    transferMoneyFailure,
+  },
 } = accountSlice;

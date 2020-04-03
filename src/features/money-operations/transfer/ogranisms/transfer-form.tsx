@@ -1,35 +1,33 @@
 import * as React from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { v4 as uuidV4 } from "uuid";
-import { H2, Button, Text } from "@ui/atoms";
-import { Input } from "@ui/molecules";
 import { Form } from "@ui/ogranisms/form";
+import { H2, Button } from "@ui/atoms";
+import { Input, Textarea } from "@ui/molecules";
 import { Stack } from "@ui/layouts/stack";
-import { replenishBalanse, ReplenishRequestData } from "../services";
-import {
-  selectIsReplenishBalanceLoading,
-  selectIsReplenishBalanceSuccess,
-} from "@features/shared/account/selectors";
+import { transferMoney, TransferMoneyData } from "../services";
 
 type FormData = {
+  recipientLogin: string;
   amount: string;
+  comment: string;
 };
 
-export const ReplenishForm = () => {
+export const TransferForm = () => {
   const { register, handleSubmit, errors } = useForm<FormData>();
-  const isLoading = useSelector(selectIsReplenishBalanceLoading);
-  const isRequestSucces = useSelector(selectIsReplenishBalanceSuccess);
   const dispatch = useDispatch();
 
-  const onSubmit = handleSubmit(({ amount }, e) => {
-    const replenishData: ReplenishRequestData = {
+  const onSubmit = handleSubmit(({ recipientLogin, amount, comment }, e) => {
+    const transferMoneyData: TransferMoneyData = {
       id: uuidV4(),
+      recipient_login: recipientLogin,
       amount: parseInt(amount),
+      comment: comment,
     };
 
-    dispatch(replenishBalanse(replenishData));
+    dispatch(transferMoney(transferMoneyData));
     e?.target.reset();
   });
 
@@ -37,7 +35,14 @@ export const ReplenishForm = () => {
     <FormContainer>
       <Form onSubmit={onSubmit}>
         <Stack small>
-          <H2>Пополнить баланс</H2>
+          <H2>Денежный перевод</H2>
+          <Input
+            name="recipientLogin"
+            type="text"
+            label="Логин получателя"
+            errors={errors.recipientLogin}
+            register={register({ required: true, pattern: /^[a-zа-яё]+$/i })}
+          />
           <Input
             name="amount"
             type="text"
@@ -46,14 +51,8 @@ export const ReplenishForm = () => {
             errors={errors.amount}
             register={register({ required: true, pattern: /^\d+$/ })}
           />
-          <Button type="submit" disabled={isLoading}>
-            Пополнить
-          </Button>
-          {isRequestSucces && (
-            <Text color="#1e7100" align="center">
-              счет успешно пополнен
-            </Text>
-          )}
+          <Textarea name="comment" errors={errors.comment} register={register()} />
+          <Button type="submit">перевести</Button>
         </Stack>
       </Form>
     </FormContainer>

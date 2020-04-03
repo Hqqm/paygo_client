@@ -20,8 +20,8 @@ export const signInIntoAccount = ({ login, password }: SignInFormData): AppThunk
     const data = await reponse.json();
     dispatch(loggedIntoAccount());
     localStorage.setItem("token", data.token);
-    dispatch(createSession(data.token));
     dispatch(loadAccount());
+    dispatch(createSession(data.token));
     history.push("/");
   } catch (err) {
     dispatch(loggingIntoAccountError({ error: err.message }));
@@ -32,9 +32,9 @@ const signInIntoAccountRequest = async (formData: SignInFormData) => {
   return fetch("/server/auth/signIn", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(formData)
+    body: JSON.stringify(formData),
   });
 };
 

@@ -3,19 +3,20 @@ import { AppDispatch } from "store";
 import {
   replenishBalanceStart,
   replenishBalanceSuccess,
-  replenishBalanceFailure
+  replenishBalanceFailure,
 } from "@features/shared/account/slice";
 
 export type ReplenishRequestData = {
+  id: string;
   amount: number;
 };
 
-export const replenishBalanse = ({ amount }: ReplenishRequestData): AppThunk => async (
+export const replenishBalanse = ({ id, amount }: ReplenishRequestData): AppThunk => async (
   dispatch: AppDispatch
 ) => {
   dispatch(replenishBalanceStart());
   try {
-    const response = await replenishBalanseRequest({ amount });
+    const response = await replenishBalanseRequest({ id, amount });
     await checkReplenishErrors(response);
     dispatch(replenishBalanceSuccess(amount));
   } catch (err) {
@@ -24,12 +25,12 @@ export const replenishBalanse = ({ amount }: ReplenishRequestData): AppThunk => 
 };
 
 const replenishBalanseRequest = async (replanishData: ReplenishRequestData) => {
-  return fetch("server/api/replenishmentBalance", {
+  return fetch("/server/api/replenishmentBalance", {
     method: "POST",
     headers: {
-      "X-Access-Token": localStorage.getItem("token") || ""
+      "X-Access-Token": localStorage.getItem("token") || "",
     },
-    body: JSON.stringify(replanishData)
+    body: JSON.stringify(replanishData),
   });
 };
 
