@@ -34,7 +34,7 @@ export const TransferForm = () => {
   return (
     <FormContainer>
       <Form onSubmit={onSubmit}>
-        <Stack small>
+        <Stack medium>
           <H2>Денежный перевод</H2>
           <Input
             name="recipientLogin"
@@ -51,7 +51,7 @@ export const TransferForm = () => {
             errors={errors.amount}
             register={register({ required: true, pattern: /^\d+$/ })}
           />
-          <Textarea name="comment" errors={errors.comment} register={register()} />
+          <Textarea name="comment" register={register()} label="Комментарий" />
           <Button type="submit">перевести</Button>
         </Stack>
       </Form>

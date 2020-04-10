@@ -14,10 +14,11 @@ import {
 } from "@features/shared/account/selectors";
 
 type FormData = {
+  cardNumber: string;
   amount: string;
 };
 
-export const ReplenishForm = () => {
+export const ReplenishWithCardForm = () => {
   const { register, handleSubmit, errors } = useForm<FormData>();
   const isLoading = useSelector(selectIsReplenishBalanceLoading);
   const isRequestSucces = useSelector(selectIsReplenishBalanceSuccess);
@@ -37,7 +38,14 @@ export const ReplenishForm = () => {
     <FormContainer>
       <Form onSubmit={onSubmit}>
         <Stack small>
-          <H2>Пополнить баланс</H2>
+          <Input
+            name="cardNumber"
+            type="text"
+            inputmode="numeric"
+            label="Номер карты"
+            errors={errors.cardNumber}
+            register={register({ required: true, pattern: /^\d+$/ })}
+          />
           <Input
             name="amount"
             type="text"
@@ -62,7 +70,4 @@ export const ReplenishForm = () => {
 
 const FormContainer = styled.div`
   min-width: 450px;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  padding: 2.5rem 1.5rem;
-  border-radius: 20px;
 `;

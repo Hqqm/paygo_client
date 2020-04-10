@@ -23,7 +23,7 @@ export const SignInForm = () => {
     <Form onSubmit={onSubmit}>
       <Stack small>
         <Box pt={1}>
-          <H2 align="center">вход</H2>
+          <H2 align="center">Вход</H2>
         </Box>
         <Input
           name="login"

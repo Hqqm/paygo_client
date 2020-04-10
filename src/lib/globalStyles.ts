@@ -11,6 +11,12 @@ export const GlobalStyles = createGlobalStyle`
     height: 100%;
   }
 
+  .react-tabs__tab--selected {
+    text-decoration: underline;
+    color: #866ec7;
+
+  }
+
   body {
     background: ${({ theme }) => theme.colors.body};
     color: ${({ theme }) => theme.colors.text};

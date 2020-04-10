@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
+import { Box } from "./box";
 
-type StackProps = {
+type InlineProps = {
   space?: string;
   recursion?: boolean;
   small?: boolean;
@@ -8,42 +9,41 @@ type StackProps = {
   large?: boolean;
 };
 
-export const Stack = styled.div<StackProps>`
+export const Inline = styled(Box)<InlineProps>`
   width: 100%;
-
   & > * + * {
-    margin-top: ${({ space }) => space};
+    margin-left: ${({ space }) => space};
   }
 
   ${({ small }) =>
     small &&
-    css<StackProps>`
+    css<InlineProps>`
       & > * + * {
-        margin-top: 1rem;
+        margin-left: 1rem;
       }
     `};
 
   ${({ medium }) =>
     medium &&
-    css<StackProps>`
+    css<InlineProps>`
       & > * + * {
-        margin-top: 2rem;
+        margin-left: 2rem;
       }
     `};
 
   ${({ large }) =>
     large &&
-    css<StackProps>`
+    css<InlineProps>`
       & > * + * {
-        margin-top: 3rem;
+        margin-left: 3rem;
       }
     `};
 
   ${({ recursion }) =>
     recursion &&
-    css<StackProps>`
+    css<InlineProps>`
       & * + * {
-        margin-top: ${({ space }) => space};
+        margin-left: ${({ space }) => space};
       }
     `};
 `;

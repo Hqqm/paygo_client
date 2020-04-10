@@ -7,7 +7,7 @@ import { Box } from "@ui/layouts/box";
 type InputProps = {
   name: string;
   label: string;
-  type: string;
+  type?: string;
   inputmode?: string;
   pattern?: string;
   errors: any;
@@ -40,7 +40,7 @@ const StyledInput = styled.input`
   width: 100%;
   background: ${({ theme }) => theme.colors.grey};
   padding: 0.5rem;
-  border: 2px solid rgb(255, 255, 255);
+  border: 2px solid transparent;
   border-radius: 5px;
   font-size: 1.2rem;
   font-family: inherit;
@@ -72,12 +72,12 @@ const Label = styled.label`
 const ContainerLabelContent = styled.span`
   display: block;
   padding-top: 1px;
-  transform: translateY(7px);
+  transform: translateY(3px);
 
   &&:before {
     content: "";
     display: block;
     height: 0;
-    margin-top: -20px;
+    margin-top: -14px;
   }
 `;

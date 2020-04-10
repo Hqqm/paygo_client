@@ -4,7 +4,7 @@ import {
   Account,
   loadAccountStart,
   loadAccountSuccess,
-  loadAccountFailure
+  loadAccountFailure,
 } from "@features/shared/account/slice";
 import { loadSession } from "@features/shared/session/slice";
 
@@ -25,7 +25,7 @@ const loadAccountRequest = async () => {
   return fetch("server/api/getAccount", {
     method: "GET",
     headers: {
-      "X-Access-Token": localStorage.getItem("token") || ""
-    }
+      "X-Access-Token": localStorage.getItem("token") || "",
+    },
   });
 };

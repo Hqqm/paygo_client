@@ -10,7 +10,7 @@ import { Box } from "@ui/layouts/box";
 import {
   useRegisterAccountRequest,
   SignUpRequestState,
-  RegisterAccountData
+  RegisterAccountData,
 } from "@features/auth/sign-up/services/register-account-api";
 
 type FormData = {
@@ -33,7 +33,7 @@ export const SignUpForm = () => {
     <Form onSubmit={onSubmit}>
       <Stack small>
         <Box pt={1}>
-          <H2 align="center">регистрация</H2>
+          <H2 align="center">Регистрация</H2>
         </Box>
         <Input
           name="email"

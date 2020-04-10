@@ -2,7 +2,7 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { selectIsAccountAuthenticated } from "../session/selectors";
-import { selectLogin, selectBalance } from "../account/selectors";
+import { selectAccount } from "../account/selectors";
 import { exitFromAccount } from "../session/services/utils";
 import { Link, NavBarLink } from "@ui/atoms";
 import { TogglerTheme } from "@features/toggler-theme/toggler-theme";
@@ -24,23 +24,27 @@ export const Header = () => {
 };
 
 const AuthenticatedNavbar = () => {
-  const login = useSelector(selectLogin);
-  const balance = useSelector(selectBalance);
+  const account = useSelector(selectAccount);
   const dispatch = useDispatch();
+
   return (
     <NavBar>
       <Ul>
+        &nbsp;
         <Li>
-          <NavBarLink to="/moneyOperations">денежные операции</NavBarLink>
+          <NavBarLink to="/replenishBalance">пополнить баланс</NavBarLink>
+        </Li>
+        <Li>
+          <NavBarLink to="/transferMoney">перевести деньги</NavBarLink>
         </Li>
         &nbsp;
         <Li>
-          <NavBarLink to="/">история переводов</NavBarLink>
+          <NavBarLink to="/tranfersHistory">история переводов</NavBarLink>
         </Li>
         &nbsp;
         <Li>
           <NavBarLink to="/">
-            {login}&nbsp;{balance}
+            {account!.login}&nbsp;{account!.balance}
           </NavBarLink>
         </Li>
         &nbsp;

@@ -4,24 +4,25 @@ const signInSlice = createSlice({
   name: "signIn",
   initialState: {
     fetchingState: "none",
-    error: null
+    error: null,
   },
   reducers: {
-    loggingIntoAccount: state => {
+    loggingIntoAccount: (state) => {
       state.fetchingState = "requesting";
+      state.error = null;
     },
-    loggedIntoAccount: state => {
+    loggedIntoAccount: (state) => {
       state.fetchingState = "success";
       state.error = null;
     },
     loggingIntoAccountError: (state, action) => {
       state.fetchingState = "fail";
       state.error = action.payload.error;
-    }
-  }
+    },
+  },
 });
 
 export const {
   actions: { loggingIntoAccount, loggedIntoAccount, loggingIntoAccountError },
-  reducer
+  reducer,
 } = signInSlice;

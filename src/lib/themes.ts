@@ -6,14 +6,15 @@ export const lightTheme: DefaultTheme = {
     text: "#000000",
     white: "#ffffff",
     grey: "#eaeaea",
-    primary: "#bf9fee"
+    primary: "#bf9fee",
   },
   space: {
     xss: "0.125rem",
     xs: "0.5rem",
     s: "1rem",
-    m: "2rem"
-  }
+    m: "2rem",
+    l: "3rem",
+  },
 };
 
 export const darkTheme: DefaultTheme = {
@@ -22,20 +23,13 @@ export const darkTheme: DefaultTheme = {
     text: "#FAFAFA",
     white: "#ffffff",
     grey: "#f3f3f3",
-    primary: "#bf9fee"
+    primary: "#bf9fee",
   },
   space: {
     xss: "0.125rem",
     xs: "0.5rem",
     s: "1rem",
-    m: "2rem"
-  }
-};
-
-const defaultTheme = {
-  space: {
-    small: "0.5rem",
-    medium: "1rem",
-    large: "2rem"
-  }
+    m: "2rem",
+    l: "3rem",
+  },
 };

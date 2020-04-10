@@ -1,13 +1,13 @@
 import * as React from "react";
-import styled from "styled-components";
 import { Header } from "@features/shared/header";
 import { Box } from "@ui/layouts/box";
 import { H2 } from "@ui/atoms";
+import { MainTempalte } from "@ui/templates/main-template";
 
 export const HomePage = () => (
-  <HomeWrapper>
-    <Header />
-    <HomeContainer>
+  <MainTempalte
+    header={<Header />}
+    main={
       <Box>
         <H2>paygo</H2>
         <H2>paygo</H2>
@@ -15,21 +15,6 @@ export const HomePage = () => (
         <H2>paygo</H2>
         <H2>paygo</H2>
       </Box>
-    </HomeContainer>
-  </HomeWrapper>
+    }
+  />
 );
-
-const HomeWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-`;
-
-const HomeContainer = styled.div`
-  display: flex;
-  flex-grow: 1;
-  justify-content: center;
-  align-items: center;
-  font-size: calc(14px + 2vw);
-  color: #f9a1bc;
-`;
