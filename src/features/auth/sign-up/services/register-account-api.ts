@@ -7,25 +7,22 @@ export type RegisterAccountData = {
   password: string;
 };
 
-export type SignUpRequestState = {
+export type AuthState = {
   fetchingState: "none" | "requesting" | "success" | "fail";
   responseErr: string;
 };
 
-export const useRegisterAccountRequest = (): [
-  SignUpRequestState,
-  (account: RegisterAccountData) => Promise<void>
-] => {
-  const [state, setState] = React.useState<SignUpRequestState>({
+export const useAuthRequest = (url: string): [AuthState, (data: any) => Promise<void>] => {
+  const [state, setState] = React.useState<AuthState>({
     fetchingState: "none",
-    responseErr: ""
+    responseErr: "",
   });
 
   const makeRequest = React.useCallback(
-    async (account: RegisterAccountData) => {
+    async (data: RegisterAccountData) => {
       setState({ fetchingState: "requesting", responseErr: "" });
       try {
-        const response = await createAccountRequest(account);
+        const response = await authRequest(url, data);
         await checkSignUpErrors(response);
         setState({ fetchingState: "success", responseErr: "" });
       } catch (err) {
@@ -38,13 +35,13 @@ export const useRegisterAccountRequest = (): [
   return [state, makeRequest];
 };
 
-const createAccountRequest = async (account: RegisterAccountData) => {
-  return fetch("/server/auth/signUp", {
+const authRequest = async (url: string, data: any) => {
+  return fetch(url, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(account)
+    body: JSON.stringify(data),
   });
 };
 

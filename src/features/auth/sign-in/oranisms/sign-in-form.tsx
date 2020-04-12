@@ -8,19 +8,33 @@ import { SignInFormData, signInIntoAccount } from "../services/sign-in-api";
 import { Stack } from "@ui/layouts/stack";
 import { Box } from "@ui/layouts/box";
 import { selectSignInErr, selectIsSignInRequesting } from "../selectors/sign-in-selectors";
+import { createSession, loadSession } from "@features/shared/session/slice";
+import { AppDispatch } from "store";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { useHistory } from "react-router-dom";
+import { loadAccount } from "@features/account-loader/account-loader-api";
 
 export const SignInForm = () => {
   const { register, handleSubmit, errors } = useForm<SignInFormData>();
   const signInErrors = useSelector(selectSignInErr);
   const isRequesting = useSelector(selectIsSignInRequesting);
-  const dispatch = useDispatch();
+  const history = useHistory();
+  const dispatch: AppDispatch = useDispatch();
 
-  const onSubmit = handleSubmit(({ login, password }) => {
-    dispatch(signInIntoAccount({ login, password }));
-  });
+  const onSubmit = async ({ login, password }: SignInFormData, e: any) => {
+    e.preventDefault();
+    const result = await dispatch(signInIntoAccount({ login, password }));
+
+    if (signInIntoAccount.fulfilled.match(result)) {
+      const token = unwrapResult(result);
+      await dispatch(loadAccount());
+      dispatch(createSession(token));
+      history.push("/");
+    }
+  };
 
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <Stack small>
         <Box pt={1}>
           <H2 align="center">Вход</H2>

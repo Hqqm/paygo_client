@@ -2,8 +2,7 @@ import { AppState } from "root-reducer";
 
 export const selectAccount = (state: AppState) => state.account.entity;
 
-export const selectIsAccountLoading = (state: AppState) =>
-  state.account.fetchingState === "requesting";
+export const selectIsAccountLoading = (state: AppState) => state.account.loading === "pending";
 
 export const selectIsReplenishBalanceLoading = (state: AppState) =>
   state.account.replenishState === "requesting";

@@ -35,7 +35,7 @@ const tranfserSlice = createSlice({
         state.entities = action.payload;
         state.loading = "succeeded";
       })
-      .addCase(fetchingTranfers.rejected, (state, action) => {
+      .addCase(fetchingTranfers.rejected, (state) => {
         state.loading = "failed";
       });
   },

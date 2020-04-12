@@ -1,4 +1,5 @@
 import { CaseReducer, PayloadAction, Action, createSlice } from "@reduxjs/toolkit";
+import { loadAccount } from "@features/account-loader/account-loader-api";
 
 export type Account = {
   id: string;
@@ -10,26 +11,10 @@ export type Account = {
 
 type State = {
   entity: Account | null;
-  fetchingState: "none" | "requesting" | "success" | "fail";
+  loading: "idle" | "pending" | "succeeded" | "failed";
   replenishState: "none" | "requesting" | "success" | "fail";
   transferState: "none" | "requesting" | "success" | "fail";
   err: string | null;
-};
-
-const loadAccountStartReducer: CaseReducer<State, Action<string>> = (state) => {
-  state.fetchingState = "requesting";
-  state.err = null;
-};
-
-const loadAccountSuccessReducer: CaseReducer<State, PayloadAction<Account>> = (state, action) => {
-  state.fetchingState = "success";
-  state.entity = action.payload;
-  state.err = null;
-};
-
-const loadAccountFailureReducer: CaseReducer<State, PayloadAction<string>> = (state, action) => {
-  state.fetchingState = "fail";
-  state.err = action.payload;
 };
 
 const replenishBalanceStartReducer: CaseReducer<State, Action<string>> = (state) => {
@@ -69,9 +54,11 @@ const transferMoneyFailureReducer: CaseReducer<State, PayloadAction<string>> = (
   state.err = action.payload;
 };
 
+const resetAccountReducer = () => initialState;
+
 const initialState: State = {
   entity: null,
-  fetchingState: "none",
+  loading: "idle",
   replenishState: "none",
   transferState: "none",
   err: null,
@@ -81,9 +68,7 @@ const accountSlice = createSlice({
   name: "account",
   initialState,
   reducers: {
-    loadAccountStart: loadAccountStartReducer,
-    loadAccountSuccess: loadAccountSuccessReducer,
-    loadAccountFailure: loadAccountFailureReducer,
+    resetAccount: resetAccountReducer,
     replenishBalanceStart: replenishBalanceStartReducer,
     replenishBalanceSuccess: replenishBalanceSuccessReducer,
     replenishBalanceFailure: replenishBalanceFailureReducer,
@@ -91,14 +76,28 @@ const accountSlice = createSlice({
     transferMoneySuccess: transferMoneySuccessReducer,
     transferMoneyFailure: transferMoneyFailureReducer,
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(loadAccount.pending, (state) => {
+        state.loading = "pending";
+        state.err = null;
+      })
+      .addCase(loadAccount.fulfilled, (state, action) => {
+        state.entity = action.payload;
+        state.err = null;
+        state.loading = "succeeded";
+      })
+      .addCase(loadAccount.rejected, (state, action) => {
+        state.err = action.error.message!;
+        state.loading = "failed";
+      });
+  },
 });
 
 export const {
   reducer,
   actions: {
-    loadAccountStart,
-    loadAccountSuccess,
-    loadAccountFailure,
+    resetAccount,
     replenishBalanceStart,
     replenishBalanceSuccess,
     replenishBalanceFailure,

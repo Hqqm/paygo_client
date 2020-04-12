@@ -8,8 +8,8 @@ import { Input } from "@ui/molecules";
 import { Stack } from "@ui/layouts/stack";
 import { Box } from "@ui/layouts/box";
 import {
-  useRegisterAccountRequest,
-  SignUpRequestState,
+  useAuthRequest,
+  AuthState,
   RegisterAccountData,
 } from "@features/auth/sign-up/services/register-account-api";
 
@@ -21,12 +21,13 @@ type FormData = {
 
 export const SignUpForm = () => {
   const { register, handleSubmit, errors } = useForm<FormData>();
-  const [requestState, makeRequest] = useRegisterAccountRequest();
+  const [requestState, makeRequest] = useAuthRequest("/server/auth/signUp");
   const isRequesting = requestState.fetchingState === "requesting";
 
-  const onSubmit = handleSubmit(({ email, login, password }) => {
+  const onSubmit = handleSubmit(({ email, login, password }, e) => {
     const account: RegisterAccountData = { id: uuidV4(), email, login, password };
     makeRequest(account);
+    e?.target.reset();
   });
 
   return (
@@ -65,7 +66,7 @@ export const SignUpForm = () => {
   );
 };
 
-const ResponseFromServer = ({ fetchingState, responseErr }: SignUpRequestState) => {
+const ResponseFromServer = ({ fetchingState, responseErr }: AuthState) => {
   if (fetchingState === "none" || fetchingState === "requesting") {
     return null;
   } else if (fetchingState === "fail") {

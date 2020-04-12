@@ -13,7 +13,7 @@ export const TransferHistory = ({ transfers }: TransferHistoryProps) => {
     <TransferHistoryContainer>
       <Stack small>
         {transfers.map((transfer) => (
-          <Transfer>
+          <Transfer key={transfer.id}>
             <Inline medium display="flex" align-items="center">
               <DateContainer>
                 <Text align="center">{transfer.date}</Text>

@@ -14,7 +14,7 @@ export const NavBarLink = styled(NavLink)`
   color: #bf9fee;
   padding: 22px;
   font-size: calc(14px + 0.4vw);
-  font-weight: bold;
+  color: #000000;
   text-decoration: none;
   &:hover {
     color: #9262fd;

@@ -13,8 +13,8 @@ export const GlobalStyles = createGlobalStyle`
 
   .react-tabs__tab--selected {
     text-decoration: underline;
+    font-weight: bold;
     color: #866ec7;
-
   }
 
   body {
