@@ -10,7 +10,6 @@ export const H2 = styled.h2<H2Props>`
   padding-top: 1px;
   font-size: 1.5rem;
   font-family: "Montserrat", sans-serif;
-  text-transform: capitalize;
   text-align: ${({ align }) => align || "left"};
   transform: translateY(10px);
   color: #000000;
@@ -25,18 +24,20 @@ export const H2 = styled.h2<H2Props>`
 
 type TextProps = {
   align?: string;
+  fs?: string;
+  offset?: string;
 };
 
 export const Text = styled.div<ColorProps & TextProps>`
-  font-size: 1.1rem;
-  ${color};
+  font-size: ${({ fs }) => fs || "1.1rem;"};
   text-align: ${({ align }) => align || "left"};
-  transform: translateY(6px);
+  transform: translateY(${({ offset }) => offset || "6px"});
+  ${color};
 
   &&:before {
     content: "";
     display: block;
     height: 0;
-    margin-top: -18px;
+    margin-top: -14px;
   }
 `;

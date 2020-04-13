@@ -4,9 +4,13 @@ type StackProps = {
   space?: string;
   recursion?: boolean;
   small?: boolean;
+  medium?: boolean;
+  large?: boolean;
 };
 
 export const Stack = styled.div<StackProps>`
+  width: 100%;
+
   & > * + * {
     margin-top: ${({ space }) => space};
   }
@@ -15,7 +19,23 @@ export const Stack = styled.div<StackProps>`
     small &&
     css<StackProps>`
       & > * + * {
-        margin-top: 1.5rem;
+        margin-top: 1rem;
+      }
+    `};
+
+  ${({ medium }) =>
+    medium &&
+    css<StackProps>`
+      & > * + * {
+        margin-top: 2rem;
+      }
+    `};
+
+  ${({ large }) =>
+    large &&
+    css<StackProps>`
+      & > * + * {
+        margin-top: 3rem;
       }
     `};
 
