@@ -1,12 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signInIntoAccount } from "./services/sign-in-api";
 
-type signInState = {
-  loading: "idle" | "pending" | "succeeded" | "failed";
-  error: string | null;
-};
+import { SignInState } from "./sign-in-types";
+import { signInIntoAccount } from "./sign-in-effects";
 
-const initialState: signInState = {
+const initialState: SignInState = {
   loading: "idle",
   error: null,
 };

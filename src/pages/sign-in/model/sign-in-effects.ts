@@ -1,13 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-export type SignInFormData = {
-  login: string;
-  password: string;
-};
-
-type SignInResponse = {
-  token: "string";
-};
+import { SignInResponse, SignInFormData } from "./sign-in-types";
 
 export const signInIntoAccount = createAsyncThunk(
   "auth/signIn",

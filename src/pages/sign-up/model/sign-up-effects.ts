@@ -1,32 +1,21 @@
 import * as React from "react";
+import { SignUpState, RegisterAccountData } from "./sign-up-types";
 
-export type RegisterAccountData = {
-  id: string;
-  email: string;
-  login: string;
-  password: string;
-};
-
-export type AuthState = {
-  fetchingState: "none" | "requesting" | "success" | "fail";
-  responseErr: string;
-};
-
-export const useAuthRequest = (url: string): [AuthState, (data: any) => Promise<void>] => {
-  const [state, setState] = React.useState<AuthState>({
-    fetchingState: "none",
+export const useSignUpRequest = (): [SignUpState, (data: RegisterAccountData) => Promise<void>] => {
+  const [state, setState] = React.useState<SignUpState>({
+    loading: "idle",
     responseErr: "",
   });
 
   const makeRequest = React.useCallback(
     async (data: RegisterAccountData) => {
-      setState({ fetchingState: "requesting", responseErr: "" });
+      setState({ loading: "pending", responseErr: "" });
       try {
-        const response = await authRequest(url, data);
+        const response = await SignUpRequest(data);
         await checkSignUpErrors(response);
-        setState({ fetchingState: "success", responseErr: "" });
+        setState({ loading: "succeeded", responseErr: "" });
       } catch (err) {
-        setState({ fetchingState: "fail", responseErr: err.message });
+        setState({ loading: "failed", responseErr: err.message });
       }
     },
     [state, setState]
@@ -35,8 +24,8 @@ export const useAuthRequest = (url: string): [AuthState, (data: any) => Promise<
   return [state, makeRequest];
 };
 
-const authRequest = async (url: string, data: any) => {
-  return fetch(url, {
+const SignUpRequest = async (data: RegisterAccountData) => {
+  return fetch("/server/auth/signUp", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

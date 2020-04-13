@@ -1,5 +1,5 @@
 export { HomePage } from "./home";
 export { TransferMoneyPage } from "./transfer-money";
-export { SignInPage } from "./sign-in";
-export { SignUpPage } from "./sign-up";
+export { SignInPage } from "./sign-in/sign-in-page";
+export { SignUpPage } from "./sign-up/sign-up-page";
 export { TransfersHistoryPage } from "./transfers/transers-history-page";

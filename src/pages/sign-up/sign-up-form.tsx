@@ -1,28 +1,18 @@
 import * as React from "react";
-import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { v4 as uuidV4 } from "uuid";
-import { H2, Button, Text } from "@ui/atoms";
-import { Form } from "@ui/ogranisms/form";
-import { Input } from "@ui/molecules";
-import { Stack } from "@ui/layouts/stack";
-import { Box } from "@ui/layouts/box";
-import {
-  useAuthRequest,
-  AuthState,
-  RegisterAccountData,
-} from "@features/auth/sign-up/services/register-account-api";
 
-type FormData = {
-  email: string;
-  login: string;
-  password: string;
-};
+import { SignUpState, RegisterAccountData, SignUpFormData } from "./model/sign-up-types";
+import { useSignUpRequest } from "./model/sign-up-effects";
+import { H2, Button, Text } from "@ui/atoms";
+import { Input } from "@ui/molecules";
+import { Form } from "@ui/ogranisms/form";
+import { Stack, Box } from "@ui/layouts";
 
 export const SignUpForm = () => {
-  const { register, handleSubmit, errors } = useForm<FormData>();
-  const [requestState, makeRequest] = useAuthRequest("/server/auth/signUp");
-  const isRequesting = requestState.fetchingState === "requesting";
+  const { register, handleSubmit, errors } = useForm<SignUpFormData>();
+  const [requestState, makeRequest] = useSignUpRequest();
+  const isRequesting = requestState.loading === "pending";
 
   const onSubmit = handleSubmit(({ email, login, password }, e) => {
     const account: RegisterAccountData = { id: uuidV4(), email, login, password };
@@ -60,16 +50,16 @@ export const SignUpForm = () => {
         <Button type="submit" disabled={isRequesting}>
           зарегистрироваться
         </Button>
-        {ResponseFromServer(requestState)}
+        {responseFromServer(requestState)}
       </Stack>
     </Form>
   );
 };
 
-const ResponseFromServer = ({ fetchingState, responseErr }: AuthState) => {
-  if (fetchingState === "none" || fetchingState === "requesting") {
+const responseFromServer = ({ loading, responseErr }: SignUpState) => {
+  if (loading === "idle" || loading === "pending") {
     return null;
-  } else if (fetchingState === "fail") {
+  } else if (loading === "failed") {
     return (
       <Text color="#ce0000" align="center">
         {responseErr}

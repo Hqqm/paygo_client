@@ -1,18 +1,19 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { H2, Button, Text } from "@ui/atoms";
-import { Form } from "@ui/ogranisms/form";
-import { Input } from "@ui/molecules";
-import { SignInFormData, signInIntoAccount } from "../services/sign-in-api";
-import { Stack } from "@ui/layouts/stack";
-import { Box } from "@ui/layouts/box";
-import { selectSignInErr, selectIsSignInRequesting } from "../selectors/sign-in-selectors";
-import { createSession, loadSession } from "@features/shared/session/slice";
-import { AppDispatch } from "store";
-import { unwrapResult } from "@reduxjs/toolkit";
 import { useHistory } from "react-router-dom";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
+
 import { loadAccount } from "@features/account-loader/account-loader-api";
+import { createSession } from "@features/shared/session/slice";
+import { AppDispatch } from "store";
+import { SignInFormData } from "./model/sign-in-types";
+import { signInIntoAccount } from "./model/sign-in-effects";
+import { selectSignInErr, selectIsSignInRequesting } from "./model/sign-in-selectors";
+import { H2, Button, Text } from "@ui/atoms";
+import { Input } from "@ui/molecules";
+import { Form } from "@ui/ogranisms/form";
+import { Box, Stack } from "@ui/layouts";
 
 export const SignInForm = () => {
   const { register, handleSubmit, errors } = useForm<SignInFormData>();
