@@ -6,3 +6,8 @@ export type Tranfser = {
   amount: number;
   date: string;
 };
+
+export type TranfersState = {
+  entities: Tranfser[];
+  loading: "idle" | "pending" | "succeeded" | "failed";
+};

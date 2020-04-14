@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 
-import { loadAccount } from "@features/account-loader/account-loader-api";
+import { loadAccount } from "@features/account-loader/account-loader-effects";
 import { createSession } from "@features/shared/session/slice";
 import { AppDispatch } from "store";
 import { SignInFormData } from "./model/sign-in-types";

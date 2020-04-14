@@ -1,26 +1,11 @@
-import { Tranfser } from "./types";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-type TranfersState = {
-  entities: Tranfser[];
-  loading: "idle" | "pending" | "succeeded" | "failed";
-};
+import { createSlice } from "@reduxjs/toolkit";
+import { TranfersState } from "./transfers-types";
+import { fetchingTranfers } from "./transfers-effects";
 
 const initialState: TranfersState = {
   entities: [],
   loading: "idle",
 };
-
-export const fetchingTranfers = createAsyncThunk("tranfsers/fetchingTranfers", async () => {
-  const response = await fetch("/server/api/transfersHistory", {
-    method: "GET",
-    headers: {
-      "X-Access-Token": localStorage.getItem("token") || "",
-    },
-  });
-  const transfers = (await response.json()) as Tranfser[];
-  return transfers;
-});
 
 const tranfserSlice = createSlice({
   name: "tranfers",

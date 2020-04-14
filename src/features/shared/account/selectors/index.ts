@@ -5,7 +5,7 @@ export const selectAccount = (state: AppState) => state.account.entity;
 export const selectIsAccountLoading = (state: AppState) => state.account.loading === "pending";
 
 export const selectIsReplenishBalanceLoading = (state: AppState) =>
-  state.account.replenishState === "requesting";
+  state.account.replenishRequest === "pending";
 
 export const selectIsReplenishBalanceSuccess = (state: AppState) =>
-  state.account.replenishState === "success";
+  state.account.replenishRequest === "succeeded";

@@ -7,24 +7,20 @@ import { H2, Button, Text } from "@ui/atoms";
 import { Input } from "@ui/molecules";
 import { Form } from "@ui/ogranisms/form";
 import { Stack } from "@ui/layouts/stack";
-import { replenishBalanse, ReplenishRequestData } from "../services";
+import { replenishBalanse } from "../model/replenish-balance-effects";
 import {
   selectIsReplenishBalanceLoading,
   selectIsReplenishBalanceSuccess,
 } from "@features/shared/account/selectors";
+import { ReplenishRequestData, ReplenishBalanceFormData } from "../model/replenish-balance-types";
 
-type FormData = {
-  cardNumber: string;
-  amount: string;
-};
-
-export const ReplenishWithCardForm = () => {
-  const { register, handleSubmit, errors } = useForm<FormData>();
+export const ReplenisBalancehWithCardForm = () => {
+  const { register, handleSubmit, errors } = useForm<ReplenishBalanceFormData>();
   const isLoading = useSelector(selectIsReplenishBalanceLoading);
   const isRequestSucces = useSelector(selectIsReplenishBalanceSuccess);
   const dispatch = useDispatch();
 
-  const onSubmit = handleSubmit(({ amount }, e) => {
+  const onSubmit = ({ amount }: ReplenishBalanceFormData, e: any) => {
     const replenishData: ReplenishRequestData = {
       id: uuidV4(),
       amount: parseInt(amount),
@@ -32,11 +28,11 @@ export const ReplenishWithCardForm = () => {
 
     dispatch(replenishBalanse(replenishData));
     e?.target.reset();
-  });
+  };
 
   return (
     <FormContainer>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Stack small>
           <Input
             name="cardNumber"
@@ -59,7 +55,7 @@ export const ReplenishWithCardForm = () => {
           </Button>
           {isRequestSucces && (
             <Text color="#1e7100" align="center">
-              счет успешно пополнен
+              Cчет успешно пополнен
             </Text>
           )}
         </Stack>

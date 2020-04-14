@@ -3,23 +3,18 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { v4 as uuidV4 } from "uuid";
-import { Form } from "@ui/ogranisms/form";
+import { transferMoney } from "../model/transfer-money-effects";
+import { TransferMoneyData, TransferMoneyFormData } from "../model/transfer-money-types";
 import { H2, Button } from "@ui/atoms";
 import { Input, Textarea } from "@ui/molecules";
+import { Form } from "@ui/ogranisms/form";
 import { Stack } from "@ui/layouts/stack";
-import { transferMoney, TransferMoneyData } from "../services";
 
-type FormData = {
-  recipientLogin: string;
-  amount: string;
-  comment: string;
-};
-
-export const TransferForm = () => {
-  const { register, handleSubmit, errors } = useForm<FormData>();
+export const TransferMoneyForm = () => {
+  const { register, handleSubmit, errors } = useForm<TransferMoneyFormData>();
   const dispatch = useDispatch();
 
-  const onSubmit = handleSubmit(({ recipientLogin, amount, comment }, e) => {
+  const onSubmit = ({ recipientLogin, amount, comment }: TransferMoneyFormData, e: any) => {
     const transferMoneyData: TransferMoneyData = {
       id: uuidV4(),
       recipient_login: recipientLogin,
@@ -28,12 +23,12 @@ export const TransferForm = () => {
     };
 
     dispatch(transferMoney(transferMoneyData));
-    e?.target.reset();
-  });
+    e.target.reset();
+  };
 
   return (
     <FormContainer>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Stack medium>
           <H2>Денежный перевод</H2>
           <Input

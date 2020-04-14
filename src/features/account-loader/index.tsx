@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadAccount } from "./account-loader-api";
+import { loadAccount } from "./account-loader-effects";
 import { selectIsAccountAuthenticated, selectToken } from "../shared/session/selectors";
 import { loadSession, createSession } from "@features/shared/session/slice";
 import { AppDispatch } from "store";
