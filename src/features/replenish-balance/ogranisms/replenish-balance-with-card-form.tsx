@@ -18,11 +18,11 @@ import { Stack } from "@ui/layouts/stack";
 
 export const ReplenisBalancehWithCardForm = () => {
   const { register, handleSubmit, errors } = useForm<ReplenishBalanceFormData>();
-  const { onSubmitForm, isLoading, isRequestSuccess } = useEnhanseForm();
+  const { onSubmitReplenishBalanceForm, isLoading, isRequestSuccess } = useEnhanseForm();
 
   return (
     <FormContainer>
-      <Form onSubmit={handleSubmit(onSubmitForm)}>
+      <Form onSubmit={handleSubmit(onSubmitReplenishBalanceForm)}>
         <Stack small>
           <Input
             name="cardNumber"
@@ -68,19 +68,20 @@ const useEnhanseForm = () => {
     };
   }, []);
 
+  const onSubmitReplenishBalanceForm = ({ amount }: ReplenishBalanceFormData, e: any) => {
+    const replenishData: ReplenishRequestData = {
+      id: uuidV4(),
+      amount: parseInt(amount),
+    };
+
+    dispatch(replenishBalanse(replenishData));
+    e?.target.reset();
+  };
+
   return {
     isLoading,
     isRequestSuccess,
-
-    onSubmitForm: ({ amount }: ReplenishBalanceFormData, e: any) => {
-      const replenishData: ReplenishRequestData = {
-        id: uuidV4(),
-        amount: parseInt(amount),
-      };
-
-      dispatch(replenishBalanse(replenishData));
-      e?.target.reset();
-    },
+    onSubmitReplenishBalanceForm,
   };
 };
 
