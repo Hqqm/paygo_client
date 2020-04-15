@@ -7,3 +7,8 @@ export type ReplenishBalanceFormData = {
   cardNumber: string;
   amount: string;
 };
+
+export type ReplenisgBalanceState = {
+  replenishRequest: "idle" | "pending" | "succeeded" | "failed";
+  replenishErr: string | null;
+};

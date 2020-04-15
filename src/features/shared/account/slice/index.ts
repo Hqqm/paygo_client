@@ -8,10 +8,6 @@ const initialAccountState: AccountState = {
   entity: null,
   loading: "idle",
   err: null,
-  replenishRequest: "idle",
-  replenishErr: null,
-  transferRequest: "idle",
-  transferErr: null,
 };
 
 const accountSlice = createSlice({
@@ -35,29 +31,11 @@ const accountSlice = createSlice({
         state.err = action.error.message!;
         state.loading = "failed";
       })
-      .addCase(replenishBalanse.pending, (state) => {
-        state.replenishRequest = "pending";
-      })
-      .addCase(replenishBalanse.fulfilled, (state, action) => {
-        state.err = null;
-        state.entity!.balance += action.payload;
-        state.replenishRequest = "succeeded";
-      })
-      .addCase(replenishBalanse.rejected, (state, action) => {
-        state.transferRequest = "failed";
-        state.replenishErr = action.error.message!;
-      })
-      .addCase(transferMoney.pending, (state) => {
-        state.transferRequest = "pending";
-      })
       .addCase(transferMoney.fulfilled, (state, action) => {
-        state.transferRequest = "succeeded";
-        state.err = null;
         state.entity!.balance -= action.payload;
       })
-      .addCase(transferMoney.rejected, (state, action) => {
-        state.transferRequest = "failed";
-        state.transferErr = action.error.message!;
+      .addCase(replenishBalanse.fulfilled, (state, action) => {
+        state.entity!.balance += action.payload;
       });
   },
 });

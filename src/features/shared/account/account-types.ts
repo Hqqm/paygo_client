@@ -10,8 +10,4 @@ export type AccountState = {
   entity: Account | null;
   loading: "idle" | "pending" | "succeeded" | "failed";
   err: string | null;
-  replenishRequest: "idle" | "pending" | "succeeded" | "failed";
-  replenishErr: string | null;
-  transferRequest: "idle" | "pending" | "succeeded" | "failed";
-  transferErr: string | null;
 };

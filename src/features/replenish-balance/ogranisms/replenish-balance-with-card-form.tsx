@@ -8,11 +8,12 @@ import { Input } from "@ui/molecules";
 import { Form } from "@ui/ogranisms/form";
 import { Stack } from "@ui/layouts/stack";
 import { replenishBalanse } from "../model/replenish-balance-effects";
+import { ReplenishRequestData, ReplenishBalanceFormData } from "../model/replenish-balance-types";
 import {
   selectIsReplenishBalanceLoading,
   selectIsReplenishBalanceSuccess,
-} from "@features/shared/account/selectors";
-import { ReplenishRequestData, ReplenishBalanceFormData } from "../model/replenish-balance-types";
+} from "../model/replenish-balance-selectors";
+import { resetReplenishState } from "../model/replenish-balance-slice";
 
 export const ReplenisBalancehWithCardForm = () => {
   const { register, handleSubmit, errors } = useForm<ReplenishBalanceFormData>();
@@ -29,6 +30,12 @@ export const ReplenisBalancehWithCardForm = () => {
     dispatch(replenishBalanse(replenishData));
     e?.target.reset();
   };
+
+  React.useEffect(() => {
+    return () => {
+      dispatch(resetReplenishState());
+    };
+  }, []);
 
   return (
     <FormContainer>
