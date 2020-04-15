@@ -14,6 +14,7 @@ import {
   selectIsReplenishBalanceSuccess,
 } from "../model/replenish-balance-selectors";
 import { resetReplenishState } from "../model/replenish-balance-slice";
+import { cardErrConverter, amountErrConverter } from "../model/replenish-balance-utils";
 
 export const ReplenisBalancehWithCardForm = () => {
   const { register, handleSubmit, errors } = useForm<ReplenishBalanceFormData>();
@@ -47,6 +48,7 @@ export const ReplenisBalancehWithCardForm = () => {
             inputmode="numeric"
             label="Номер карты"
             errors={errors.cardNumber}
+            errConverter={cardErrConverter}
             register={register({ required: true, pattern: /^\d+$/ })}
           />
           <Input
@@ -55,6 +57,7 @@ export const ReplenisBalancehWithCardForm = () => {
             inputmode="numeric"
             label="Сумма"
             errors={errors.amount}
+            errConverter={amountErrConverter}
             register={register({ required: true, pattern: /^\d+$/ })}
           />
           <Button type="submit" disabled={isLoading}>
