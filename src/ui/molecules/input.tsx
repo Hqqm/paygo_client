@@ -10,8 +10,8 @@ type InputProps = {
   type?: string;
   inputmode?: string;
   pattern?: string;
-  errConverter?: (err: any) => string;
   errors: any;
+  errMapper?: (errType: string) => string;
   register: (
     ref: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | CustomElement | null
   ) => void;
@@ -24,7 +24,7 @@ export const Input = ({
   pattern,
   label,
   errors,
-  errConverter,
+  errMapper,
   register,
 }: InputProps) => (
   <ContainerInput>
@@ -47,7 +47,7 @@ export const Input = ({
 
     {errors && (
       <Box pt={"xs"} pl={"xss"}>
-        <Text color="#ce0000">{errConverter && errConverter(errors)}</Text>
+        <Text color="#ce0000">{errMapper && errMapper(errors.type)}</Text>
       </Box>
     )}
   </ContainerInput>
