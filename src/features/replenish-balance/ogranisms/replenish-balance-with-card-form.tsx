@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { v4 as uuidV4 } from "uuid";
-import { cardErrMapper, amountErrMapper } from "../model/replenish-balance-utils";
+import { cardErrMapper, amountErrMapper } from "@lib/errMappers";
 import { replenishBalanse } from "../model/replenish-balance-effects";
 import { ReplenishRequestData, ReplenishBalanceFormData } from "../model/replenish-balance-types";
 import {
@@ -29,6 +29,7 @@ export const ReplenisBalancehWithCardForm = () => {
             type="text"
             inputmode="numeric"
             label="Номер карты"
+            ariaLabel="Номер карты"
             errors={errors.cardNumber}
             errMapper={cardErrMapper}
             register={register({ required: true, pattern: /^\d+$/ })}
@@ -38,6 +39,7 @@ export const ReplenisBalancehWithCardForm = () => {
             type="number"
             inputmode="numeric"
             label="Сумма"
+            ariaLabel="Сумма пополнения"
             errors={errors.amount}
             errMapper={amountErrMapper}
             register={register({ required: true, pattern: /^\d+$/, min: 1 })}
@@ -58,7 +60,6 @@ export const ReplenisBalancehWithCardForm = () => {
 
 const useEnhanseForm = () => {
   const dispatch = useDispatch();
-
   const isLoading = useSelector(selectIsReplenishBalanceLoading);
   const isRequestSuccess = useSelector(selectIsReplenishBalanceSuccess);
 

@@ -6,8 +6,9 @@ import { Box } from "@ui/layouts/box";
 
 type InputProps = {
   name: string;
-  label: string;
   type?: string;
+  label: string;
+  ariaLabel: string;
   inputmode?: string;
   pattern?: string;
   errors: any;
@@ -23,6 +24,7 @@ export const Input = ({
   inputmode,
   pattern,
   label,
+  ariaLabel,
   errors,
   errMapper,
   register,
@@ -43,6 +45,7 @@ export const Input = ({
       pattern={pattern}
       inputMode={inputmode}
       errors={errors}
+      aria-label={ariaLabel}
     />
 
     {errors && (

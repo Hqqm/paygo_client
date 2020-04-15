@@ -35,6 +35,7 @@ export const TransferMoneyForm = () => {
             name="recipientLogin"
             type="text"
             label="Логин получателя"
+            ariaLabel="Логин получателя"
             errors={errors.recipientLogin}
             register={register({ required: true, pattern: /^[a-zа-яё]+$/i })}
           />
@@ -43,6 +44,7 @@ export const TransferMoneyForm = () => {
             type="text"
             inputmode="numeric"
             label="Сумма"
+            ariaLabel="Сумма пополнения"
             errors={errors.amount}
             register={register({ required: true, pattern: /^\d+$/ })}
           />

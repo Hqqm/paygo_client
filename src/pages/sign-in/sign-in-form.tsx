@@ -4,12 +4,12 @@ import { useHistory } from "react-router-dom";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "store";
+import { loginErrMapper, passwordErrMapper } from "@lib/errMappers";
 import { loadAccount } from "@features/account-loader/account-loader-effects";
 import { createSession } from "@features/shared/session/slice";
 import { SignInFormData } from "./model/sign-in-types";
 import { signInIntoAccount } from "./model/sign-in-effects";
 import { selectSignInErr, selectIsSignInRequesting } from "./model/sign-in-selectors";
-import { loginErrMapper, passwordErrMaper } from "./model/sign-in-utils";
 import { H2, Button, Text } from "@ui/atoms";
 import { Input } from "@ui/molecules";
 import { Form } from "@ui/ogranisms/form";
@@ -29,6 +29,7 @@ export const SignInForm = () => {
           name="login"
           type="text"
           label="Логин"
+          ariaLabel="Логин"
           errors={errors.login}
           errMapper={loginErrMapper}
           register={register({ required: true })}
@@ -37,8 +38,9 @@ export const SignInForm = () => {
           name="password"
           type="password"
           label="Пароль"
+          ariaLabel="Пароль"
           errors={errors.password}
-          errMapper={passwordErrMaper}
+          errMapper={passwordErrMapper}
           register={register({ required: true })}
         />
         <Button type="submit" disabled={isRequesting}>
