@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadAccount } from "./account-loader-effects";
-import { selectIsAccountAuthenticated, selectToken } from "../shared/session/selectors";
-import { loadSession, createSession } from "@features/shared/session/slice";
 import { AppDispatch } from "store";
+import { loadAccount } from "./account-loader-effects";
+import { selectIsAccountAuthenticated, selectToken } from "@features/shared/session/selectors";
+import { loadSession } from "@features/shared/session/slice";
 
 type AccountLoaderProps = {
   children: React.ReactElement;

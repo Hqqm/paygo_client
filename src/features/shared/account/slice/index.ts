@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AccountState } from "../account-types";
-import { loadAccount } from "@features/account-loader/account-loader-effects";
+import { loadAccount } from "@lib/account-loader/account-loader-effects";
 import { replenishBalanse } from "@features/replenish-balance/model/replenish-balance-effects";
 import { transferMoney } from "@features/transfer-money/model/transfer-money-effects";
 

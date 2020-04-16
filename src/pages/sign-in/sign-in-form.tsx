@@ -5,7 +5,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "store";
 import { loginErrMapper, passwordErrMapper } from "@lib/errMappers";
-import { loadAccount } from "@features/account-loader/account-loader-effects";
+import { loadAccount } from "@lib/account-loader/account-loader-effects";
 import { createSession } from "@features/shared/session/slice";
 import { SignInFormData } from "./model/sign-in-types";
 import { signInIntoAccount } from "./model/sign-in-effects";

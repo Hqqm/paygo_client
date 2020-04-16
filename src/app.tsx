@@ -7,7 +7,7 @@ import { AppState } from "root-reducer";
 import { Routes } from "routes";
 import { GlobalStyles } from "@lib/globalStyles";
 import { lightTheme, darkTheme } from "@lib/themes";
-import { AccountLoader } from "@features/account-loader";
+import { AccountLoader } from "@lib/account-loader";
 
 export const App: React.FC<{}> = hot(module)(() => {
   const theme = useSelector((state: AppState) => state.theme.mode);
