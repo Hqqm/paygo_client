@@ -4,7 +4,8 @@ import { useHistory } from "react-router-dom";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "store";
-import { loginErrMapper, passwordErrMapper } from "@lib/errMappers";
+import { loginValidator, passwordValidator } from "@lib/use-form-helpers/validators";
+import { loginErrMapper, passwordErrMapper } from "@lib/use-form-helpers/errMappers";
 import { loadAccount } from "@lib/account-loader/account-loader-effects";
 import { createSession } from "@features/shared/session/slice";
 import { SignInFormData } from "./model/sign-in-types";
@@ -38,7 +39,7 @@ export const SignInForm = () => {
           ariaLabel="Логин"
           errors={errors.login}
           errMapper={loginErrMapper}
-          register={register({ required: true })}
+          register={register(loginValidator())}
         />
         <Input
           name="password"
@@ -47,7 +48,7 @@ export const SignInForm = () => {
           ariaLabel="Пароль"
           errors={errors.password}
           errMapper={passwordErrMapper}
-          register={register({ required: true })}
+          register={register(passwordValidator())}
         />
         <Button type="submit" disabled={isRequesting}>
           Войти

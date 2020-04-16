@@ -1,6 +1,6 @@
 import { combineReducers, ThunkAction, Action } from "@reduxjs/toolkit";
 
-import { reducer as transfersReducer } from "pages/transfers-history/model/transfers-slice";
+import { reducer as transfersReducer } from "@features/transfers-history/model/transfers-slice";
 import { reducer as signInReducer } from "pages/sign-in/model/sign-in-slice";
 import { reducer as replenishBalanceReducer } from "@features/replenish-balance/model/replenish-balance-slice";
 import { reducer as transferMoneyReducer } from "@features/transfer-money/model/transfer-money-slice";

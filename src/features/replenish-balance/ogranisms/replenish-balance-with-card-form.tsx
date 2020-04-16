@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { v4 as uuidV4 } from "uuid";
-import { cardErrMapper, amountErrMapper } from "@lib/errMappers";
+import { cardErrMapper, amountErrMapper } from "@lib/use-form-helpers/errMappers";
 import { replenishBalanse } from "../model/replenish-balance-effects";
 import { ReplenishRequestData, ReplenishBalanceFormData } from "../model/replenish-balance-types";
 import {

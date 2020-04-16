@@ -1,7 +1,16 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidV4 } from "uuid";
-import { loginErrMapper, passwordErrMapper, emailErrMapper } from "@lib/errMappers";
+import {
+  loginValidator,
+  passwordValidator,
+  emailValidator,
+} from "@lib/use-form-helpers/validators";
+import {
+  loginErrMapper,
+  passwordErrMapper,
+  emailErrMapper,
+} from "@lib/use-form-helpers/errMappers";
 import { SignUpState, RegisterAccountData, SignUpFormData } from "./model/sign-up-types";
 import { useSignUpRequest } from "./model/sign-up-effects";
 import { H2, Button, Text } from "@ui/atoms";
@@ -32,10 +41,7 @@ export const SignUpForm = () => {
           ariaLabel="Почтовый адрес"
           errors={errors.email}
           errMapper={emailErrMapper}
-          register={register({
-            required: true,
-            pattern: /^[-._a-z0-9]+@(?:[a-z0-9][-a-z0-9]+\.)+[a-z]{2,6}$/,
-          })}
+          register={register(emailValidator())}
         />
         <Input
           name="login"
@@ -44,7 +50,7 @@ export const SignUpForm = () => {
           ariaLabel="Логин"
           errors={errors.login}
           errMapper={loginErrMapper}
-          register={register({ required: true })}
+          register={register(loginValidator())}
         />
         <Input
           name="password"
@@ -53,7 +59,7 @@ export const SignUpForm = () => {
           ariaLabel="Пароль"
           errors={errors.password}
           errMapper={passwordErrMapper}
-          register={register({ required: true })}
+          register={register(passwordValidator())}
         />
         <Button type="submit" disabled={isRequesting}>
           Зарегистрироваться
