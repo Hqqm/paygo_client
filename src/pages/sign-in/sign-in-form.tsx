@@ -16,8 +16,14 @@ import { Form } from "@ui/ogranisms/form";
 import { Box, Stack } from "@ui/layouts";
 
 export const SignInForm = () => {
-  const { register, handleSubmit, errors } = useForm<SignInFormData>();
-  const { signInErrors, isRequesting, onSubmitSignInForm } = useEnhanseSignInForm();
+  const {
+    signInErrors,
+    isRequesting,
+    errors,
+    register,
+    handleSubmit,
+    onSubmitSignInForm,
+  } = useEnhanseSignInForm();
 
   return (
     <Form onSubmit={handleSubmit(onSubmitSignInForm)}>
@@ -61,6 +67,7 @@ const useEnhanseSignInForm = () => {
   const isRequesting = useSelector(selectIsSignInRequesting);
   const history = useHistory();
   const dispatch: AppDispatch = useDispatch();
+  const { register, handleSubmit, errors } = useForm<SignInFormData>();
 
   const onSubmitSignInForm = async ({ login, password }: SignInFormData, e: any) => {
     e.preventDefault();
@@ -77,6 +84,9 @@ const useEnhanseSignInForm = () => {
   return {
     signInErrors,
     isRequesting,
+    errors,
+    register,
+    handleSubmit,
     onSubmitSignInForm,
   };
 };

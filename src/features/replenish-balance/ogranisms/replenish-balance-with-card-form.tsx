@@ -17,8 +17,14 @@ import { Form } from "@ui/ogranisms/form";
 import { Stack } from "@ui/layouts/stack";
 
 export const ReplenisBalancehWithCardForm = () => {
-  const { register, handleSubmit, errors } = useForm<ReplenishBalanceFormData>();
-  const { onSubmitReplenishBalanceForm, isLoading, isRequestSuccess } = useEnhanseForm();
+  const {
+    isLoading,
+    isRequestSuccess,
+    errors,
+    register,
+    handleSubmit,
+    onSubmitReplenishBalanceForm,
+  } = useEnhanseForm();
 
   return (
     <FormContainer>
@@ -62,6 +68,7 @@ const useEnhanseForm = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsReplenishBalanceLoading);
   const isRequestSuccess = useSelector(selectIsReplenishBalanceSuccess);
+  const { register, handleSubmit, errors } = useForm<ReplenishBalanceFormData>();
 
   React.useEffect(() => {
     return () => {
@@ -82,6 +89,9 @@ const useEnhanseForm = () => {
   return {
     isLoading,
     isRequestSuccess,
+    errors,
+    register,
+    handleSubmit,
     onSubmitReplenishBalanceForm,
   };
 };

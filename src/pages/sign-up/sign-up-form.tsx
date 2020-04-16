@@ -10,8 +10,14 @@ import { Form } from "@ui/ogranisms/form";
 import { Stack, Box } from "@ui/layouts";
 
 export const SignUpForm = () => {
-  const { register, handleSubmit, errors } = useForm<SignUpFormData>();
-  const { isRequesting, requestState, onSubmitSignUpForm } = useEnhanseSignUpForm();
+  const {
+    isRequesting,
+    requestState,
+    errors,
+    register,
+    handleSubmit,
+    onSubmitSignUpForm,
+  } = useEnhanseSignUpForm();
 
   return (
     <Form onSubmit={handleSubmit(onSubmitSignUpForm)}>
@@ -61,6 +67,7 @@ export const SignUpForm = () => {
 const useEnhanseSignUpForm = () => {
   const [requestState, makeRequest] = useSignUpRequest();
   const isRequesting = requestState.loading === "pending";
+  const { register, handleSubmit, errors } = useForm<SignUpFormData>();
 
   const onSubmitSignUpForm = ({ email, login, password }: SignUpFormData, e: any) => {
     const account: RegisterAccountData = { id: uuidV4(), email, login, password };
@@ -71,6 +78,9 @@ const useEnhanseSignUpForm = () => {
   return {
     isRequesting,
     requestState,
+    errors,
+    register,
+    handleSubmit,
     onSubmitSignUpForm,
   };
 };

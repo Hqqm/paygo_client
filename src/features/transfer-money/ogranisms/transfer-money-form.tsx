@@ -11,24 +11,16 @@ import { Form } from "@ui/ogranisms/form";
 import { Stack } from "@ui/layouts/stack";
 
 export const TransferMoneyForm = () => {
-  const { register, handleSubmit, errors } = useForm<TransferMoneyFormData>();
-  const dispatch = useDispatch();
-
-  const onSubmit = ({ recipientLogin, amount, comment }: TransferMoneyFormData, e: any) => {
-    const transferMoneyData: TransferMoneyData = {
-      id: uuidV4(),
-      recipient_login: recipientLogin,
-      amount: parseInt(amount),
-      comment: comment,
-    };
-
-    dispatch(transferMoney(transferMoneyData));
-    e.target.reset();
-  };
+  const {
+    errors,
+    register,
+    handleSubmit,
+    onSubmitTransferMoneyForm,
+  } = useEnhanseTransferMoneyForm();
 
   return (
     <FormContainer>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(onSubmitTransferMoneyForm)}>
         <Stack medium>
           <H2>Денежный перевод</H2>
           <Input
@@ -54,6 +46,33 @@ export const TransferMoneyForm = () => {
       </Form>
     </FormContainer>
   );
+};
+
+const useEnhanseTransferMoneyForm = () => {
+  const { register, handleSubmit, errors } = useForm<TransferMoneyFormData>();
+  const dispatch = useDispatch();
+
+  const onSubmitTransferMoneyForm = (
+    { recipientLogin, amount, comment }: TransferMoneyFormData,
+    e: any
+  ) => {
+    const transferMoneyData: TransferMoneyData = {
+      id: uuidV4(),
+      recipient_login: recipientLogin,
+      amount: parseInt(amount),
+      comment: comment,
+    };
+
+    dispatch(transferMoney(transferMoneyData));
+    e.target.reset();
+  };
+
+  return {
+    register,
+    handleSubmit,
+    errors,
+    onSubmitTransferMoneyForm,
+  };
 };
 
 const FormContainer = styled.div`
