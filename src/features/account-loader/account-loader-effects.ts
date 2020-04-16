@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Account } from "@features/shared/account/slice";
+import { Account } from "@features/shared/account/account-types";
 
 export const loadAccount = createAsyncThunk(
   "account/load",

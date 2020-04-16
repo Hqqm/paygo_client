@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Tranfser } from "../model/types";
+import { Tranfser } from "../model/transfers-types";
 import { Inline, Stack } from "@ui/layouts";
 import { Text } from "@ui/atoms";
 

@@ -3,43 +3,31 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { v4 as uuidV4 } from "uuid";
-import { Form } from "@ui/ogranisms/form";
+import { transferMoney } from "../model/transfer-money-effects";
+import { TransferMoneyData, TransferMoneyFormData } from "../model/transfer-money-types";
 import { H2, Button } from "@ui/atoms";
 import { Input, Textarea } from "@ui/molecules";
+import { Form } from "@ui/ogranisms/form";
 import { Stack } from "@ui/layouts/stack";
-import { transferMoney, TransferMoneyData } from "../services";
 
-type FormData = {
-  recipientLogin: string;
-  amount: string;
-  comment: string;
-};
-
-export const TransferForm = () => {
-  const { register, handleSubmit, errors } = useForm<FormData>();
-  const dispatch = useDispatch();
-
-  const onSubmit = handleSubmit(({ recipientLogin, amount, comment }, e) => {
-    const transferMoneyData: TransferMoneyData = {
-      id: uuidV4(),
-      recipient_login: recipientLogin,
-      amount: parseInt(amount),
-      comment: comment,
-    };
-
-    dispatch(transferMoney(transferMoneyData));
-    e?.target.reset();
-  });
+export const TransferMoneyForm = () => {
+  const {
+    errors,
+    register,
+    handleSubmit,
+    onSubmitTransferMoneyForm,
+  } = useEnhanseTransferMoneyForm();
 
   return (
     <FormContainer>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={handleSubmit(onSubmitTransferMoneyForm)}>
         <Stack medium>
           <H2>Денежный перевод</H2>
           <Input
             name="recipientLogin"
             type="text"
             label="Логин получателя"
+            ariaLabel="Логин получателя"
             errors={errors.recipientLogin}
             register={register({ required: true, pattern: /^[a-zа-яё]+$/i })}
           />
@@ -48,6 +36,7 @@ export const TransferForm = () => {
             type="text"
             inputmode="numeric"
             label="Сумма"
+            ariaLabel="Сумма пополнения"
             errors={errors.amount}
             register={register({ required: true, pattern: /^\d+$/ })}
           />
@@ -57,6 +46,33 @@ export const TransferForm = () => {
       </Form>
     </FormContainer>
   );
+};
+
+const useEnhanseTransferMoneyForm = () => {
+  const { register, handleSubmit, errors } = useForm<TransferMoneyFormData>();
+  const dispatch = useDispatch();
+
+  const onSubmitTransferMoneyForm = (
+    { recipientLogin, amount, comment }: TransferMoneyFormData,
+    e: any
+  ) => {
+    const transferMoneyData: TransferMoneyData = {
+      id: uuidV4(),
+      recipient_login: recipientLogin,
+      amount: parseInt(amount),
+      comment: comment,
+    };
+
+    dispatch(transferMoney(transferMoneyData));
+    e.target.reset();
+  };
+
+  return {
+    register,
+    handleSubmit,
+    errors,
+    onSubmitTransferMoneyForm,
+  };
 };
 
 const FormContainer = styled.div`

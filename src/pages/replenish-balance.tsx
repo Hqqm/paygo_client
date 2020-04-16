@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Tabs, TabPanel } from "react-tabs";
-import { ReplenishWithCardForm } from "@features/money-operations/replenish/ogranisms/replenish-form";
+import { ReplenisBalancehWithCardForm } from "@features/replenish-balance/ogranisms/replenish-balance-with-card-form";
 import { Header } from "@features/shared/header";
 import { Text, H2, Tab } from "@ui/atoms";
 import { Stack } from "@ui/layouts/stack";
@@ -26,7 +26,7 @@ export const ReplenishBalancePage = () => (
                   </TabList>
                   <TabsPanelWrapper>
                     <TabPanel>
-                      <ReplenishWithCardForm />
+                      <ReplenisBalancehWithCardForm />
                     </TabPanel>
                     <TabPanel>тут форма телефона</TabPanel>
                   </TabsPanelWrapper>

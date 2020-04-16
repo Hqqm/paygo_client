@@ -29,7 +29,7 @@ type TextProps = {
 };
 
 export const Text = styled.div<ColorProps & TextProps>`
-  font-size: ${({ fs }) => fs || "1.1rem;"};
+  font-size: ${({ fs }) => fs || "1.0rem;"};
   text-align: ${({ align }) => align || "left"};
   transform: translateY(${({ offset }) => offset || "6px"});
   ${color};

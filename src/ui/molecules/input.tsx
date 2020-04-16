@@ -1,22 +1,34 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { CustomElement } from "react-hook-form";
 import { Text } from "@ui/atoms";
 import { Box } from "@ui/layouts/box";
 
 type InputProps = {
   name: string;
-  label: string;
   type?: string;
+  label: string;
+  ariaLabel: string;
   inputmode?: string;
   pattern?: string;
   errors: any;
+  errMapper?: (errType: string) => string;
   register: (
     ref: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | CustomElement | null
   ) => void;
 };
 
-export const Input = ({ name, type, inputmode, pattern, label, errors, register }: InputProps) => (
+export const Input = ({
+  name,
+  type,
+  inputmode,
+  pattern,
+  label,
+  ariaLabel,
+  errors,
+  errMapper,
+  register,
+}: InputProps) => (
   <ContainerInput>
     <Box pb={"xs"} pl={"xss"}>
       <Box color="#000000" as="span">
@@ -26,17 +38,29 @@ export const Input = ({ name, type, inputmode, pattern, label, errors, register 
       </Box>
     </Box>
 
-    <StyledInput name={name} type={type} ref={register} pattern={pattern} inputMode={inputmode} />
+    <StyledInput
+      name={name}
+      type={type}
+      ref={register}
+      pattern={pattern}
+      inputMode={inputmode}
+      errors={errors}
+      aria-label={ariaLabel}
+    />
 
     {errors && (
       <Box pt={"xs"} pl={"xss"}>
-        <Text color="#ce0000">{errors.type}</Text>
+        <Text color="#ce0000">{errMapper && errMapper(errors.type)}</Text>
       </Box>
     )}
   </ContainerInput>
 );
 
-const StyledInput = styled.input`
+type StyledInputProps = {
+  errors?: boolean;
+};
+
+const StyledInput = styled.input<StyledInputProps>`
   width: 100%;
   background: ${({ theme }) => theme.colors.grey};
   padding: 0.5rem;
@@ -49,6 +73,15 @@ const StyledInput = styled.input`
   &:focus {
     border: 2px solid #866ec7;
   }
+
+  ${({ errors }) =>
+    errors &&
+    css<StyledInputProps>`
+      border: 1px solid #ce0000;
+      &:focus {
+        border: 1px solid #ce0000;
+      }
+    `};
 
   &[type="number"] {
     -moz-appearance: textfield;
