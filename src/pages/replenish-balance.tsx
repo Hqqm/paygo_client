@@ -68,11 +68,6 @@ const ReplenishForWrapper = styled.div`
   flex-direction: column;
 `;
 
-const ReplenishForWrapper2 = styled.div`
-  display: flex;
-  width: 100%;
-`;
-
 const TabsPanelWrapper = styled.div`
   margin-top: 1rem;
 `;

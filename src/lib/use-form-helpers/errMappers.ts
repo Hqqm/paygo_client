@@ -33,7 +33,7 @@ export const emailErrMapper = (errType: string): string => {
 
 export const cardErrMapper = (errType: string): string => {
   switch (errType) {
-    case "required":
+    case "isEmpty":
       return "Пожалуйста, заполните поле номер карты";
     case "pattern":
       return "Пожалуйста, введите корректный номер карты";
@@ -44,11 +44,11 @@ export const cardErrMapper = (errType: string): string => {
 
 export const amountErrMapper = (errType: string): string => {
   switch (errType) {
-    case "required":
+    case "isEmpty":
       return "Пожалуйста, заполните поле сумма";
     case "pattern":
-      return "Пожалуйста, введите корректную сумму";
-    case "min":
+      return "Сумма может содержать только цифры";
+    case "positiveValue":
       return "Cумма должна быть больше 0";
     default:
       return "";

@@ -36,7 +36,9 @@ const isReplenishOperation = (transfer: Tranfser) =>
         <Text>{transfer.sender_login}, пополнение баланса</Text>
       </TransferItem>
       <TransferItem>
-        <Text color="#1e7100">+{transfer.amount}</Text>
+        <Text color="#1e7100" fs="1.2rem">
+          +{transfer.amount}
+        </Text>
       </TransferItem>
     </>
   ) : (
@@ -45,7 +47,9 @@ const isReplenishOperation = (transfer: Tranfser) =>
         <Text>{transfer.recipient_login}</Text>
       </TransferItem>
       <TransferItem>
-        <Text color="#ce0000">-{transfer.amount}</Text>
+        <Text color="#ce0000" fs="1.2rem">
+          -{transfer.amount}
+        </Text>
       </TransferItem>
     </>
   );

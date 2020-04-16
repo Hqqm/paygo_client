@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { v4 as uuidV4 } from "uuid";
+import { loginErrMapper, amountErrMapper } from "@lib/use-form-helpers/errMappers";
+import { loginValidator, amountValidator } from "@lib/use-form-helpers/validators";
 import { transferMoney } from "../model/transfer-money-effects";
 import { TransferMoneyData, TransferMoneyFormData } from "../model/transfer-money-types";
 import { H2, Button } from "@ui/atoms";
@@ -29,7 +31,8 @@ export const TransferMoneyForm = () => {
             label="Логин получателя"
             ariaLabel="Логин получателя"
             errors={errors.recipientLogin}
-            register={register({ required: true, pattern: /^[a-zа-яё]+$/i })}
+            errMapper={loginErrMapper}
+            register={register(loginValidator())}
           />
           <Input
             name="amount"
@@ -38,10 +41,11 @@ export const TransferMoneyForm = () => {
             label="Сумма"
             ariaLabel="Сумма пополнения"
             errors={errors.amount}
-            register={register({ required: true, pattern: /^\d+$/ })}
+            errMapper={amountErrMapper}
+            register={register(amountValidator())}
           />
           <Textarea name="comment" register={register()} label="Комментарий" />
-          <Button type="submit">перевести</Button>
+          <Button type="submit">Перевести</Button>
         </Stack>
       </Form>
     </FormContainer>
