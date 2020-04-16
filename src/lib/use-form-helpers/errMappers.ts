@@ -1,7 +1,9 @@
 export const loginErrMapper = (errType: string): string => {
   switch (errType) {
-    case "required":
+    case "isEmpty":
       return "Пожалуйста, заполните поле логин";
+    case "lessThenOne":
+      return "Длина логина должна быть больше 1 символа";
     default:
       return "";
   }
@@ -9,8 +11,10 @@ export const loginErrMapper = (errType: string): string => {
 
 export const passwordErrMapper = (errType: string): string => {
   switch (errType) {
-    case "required":
+    case "isEmpty":
       return "Пожалуйста, заполните поле пароль";
+    case "lessThenThree":
+      return "Длина Пароля должна быть больше 3 символов";
     default:
       return "";
   }
@@ -18,7 +22,7 @@ export const passwordErrMapper = (errType: string): string => {
 
 export const emailErrMapper = (errType: string): string => {
   switch (errType) {
-    case "required":
+    case "isEmpty":
       return "Пожалуйста, заполните поле почта";
     case "pattern":
       return "Пожалуйста, введите корректный адрес почты";
@@ -29,7 +33,7 @@ export const emailErrMapper = (errType: string): string => {
 
 export const cardErrMapper = (errType: string): string => {
   switch (errType) {
-    case "required":
+    case "isEmpty":
       return "Пожалуйста, заполните поле номер карты";
     case "pattern":
       return "Пожалуйста, введите корректный номер карты";
@@ -40,11 +44,11 @@ export const cardErrMapper = (errType: string): string => {
 
 export const amountErrMapper = (errType: string): string => {
   switch (errType) {
-    case "required":
+    case "isEmpty":
       return "Пожалуйста, заполните поле сумма";
     case "pattern":
-      return "Пожалуйста, введите корректную сумму";
-    case "min":
+      return "Сумма может содержать только цифры";
+    case "positiveValue":
       return "Cумма должна быть больше 0";
     default:
       return "";

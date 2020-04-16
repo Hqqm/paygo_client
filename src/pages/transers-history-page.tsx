@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectTransfers } from "./model/transfers-selectors";
-import { fetchingTranfers } from "./model/transfers-effects";
 import { Header } from "@features/shared/header";
-import { TransferHistory } from "./molecules/transfer-card";
+import { selectTransfers } from "@features/transfers-history/model/transfers-selectors";
+import { fetchingTranfers } from "@features/transfers-history/model/transfers-effects";
+import { TransferHistory } from "@features/transfers-history/molecules/transfer-history";
 import { TransferMoneyTemplate } from "@ui/templates/transfer-money-teplate";
 
 export const TransfersHistoryPage = () => {

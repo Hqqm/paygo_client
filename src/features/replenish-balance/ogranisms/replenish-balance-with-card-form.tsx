@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { v4 as uuidV4 } from "uuid";
-import { cardErrMapper, amountErrMapper } from "@lib/errMappers";
+import { cardErrMapper, amountErrMapper } from "@lib/use-form-helpers/errMappers";
+import { cardValidator, amountValidator } from "@lib/use-form-helpers/validators";
 import { replenishBalanse } from "../model/replenish-balance-effects";
 import { ReplenishRequestData, ReplenishBalanceFormData } from "../model/replenish-balance-types";
 import {
@@ -38,17 +39,17 @@ export const ReplenisBalancehWithCardForm = () => {
             ariaLabel="Номер карты"
             errors={errors.cardNumber}
             errMapper={cardErrMapper}
-            register={register({ required: true, pattern: /^\d+$/ })}
+            register={register(cardValidator())}
           />
           <Input
             name="amount"
-            type="number"
+            type="text"
             inputmode="numeric"
             label="Сумма"
             ariaLabel="Сумма пополнения"
             errors={errors.amount}
             errMapper={amountErrMapper}
-            register={register({ required: true, pattern: /^\d+$/, min: 1 })}
+            register={register(amountValidator())}
           />
           <Button type="submit" disabled={isLoading}>
             Пополнить

@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import { TogglerTheme } from "@lib/toggler-theme/toggler-theme";
 import { selectIsAccountAuthenticated } from "../session/selectors";
-import { selectAccount } from "../account/selectors";
 import { exitFromAccount } from "../session/services/utils";
+import { selectAccount } from "../account/selectors";
 import { Link, NavBarLink } from "@ui/atoms";
-import { TogglerTheme } from "@features/toggler-theme/toggler-theme";
 
 const logoSvg = require("public/logo.svg");
 
