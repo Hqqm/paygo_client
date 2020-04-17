@@ -5,6 +5,7 @@ import { selectTransfers } from "@features/transfers-history/model/transfers-sel
 import { fetchingTranfers } from "@features/transfers-history/model/transfers-effects";
 import { TransferHistory } from "@features/transfers-history/molecules/transfer-history";
 import { TransferMoneyTemplate } from "@ui/templates/transfer-money-teplate";
+import { WithAuthentication } from "@lib/with-authentication/with-authentication";
 
 export const TransfersHistoryPage = () => {
   const transfers = useSelector(selectTransfers);
@@ -15,6 +16,13 @@ export const TransfersHistoryPage = () => {
   }, []);
 
   return (
-    <TransferMoneyTemplate header={<Header />} main={<TransferHistory transfers={transfers} />} />
+    <TransferMoneyTemplate
+      header={<Header />}
+      main={
+        <WithAuthentication>
+          <TransferHistory transfers={transfers} />{" "}
+        </WithAuthentication>
+      }
+    />
   );
 };
