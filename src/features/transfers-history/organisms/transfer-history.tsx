@@ -2,26 +2,28 @@ import * as React from "react";
 import styled from "styled-components";
 import { Tranfser } from "../model/types";
 import { Text } from "@ui/atoms";
-import { TransferInfo } from "./transfer-info"
+import { TransferInfo } from "./transfer-info";
 import { Inline, Stack } from "@ui/layouts";
 import { useSelector, useDispatch } from "react-redux";
-import { selectCurrentTransfer } from "../model/transfers-selectors"
+import { selectCurrentTransfer } from "../model/transfers-selectors";
 import { fetchingTranferById } from "../model/transfer-effects";
+import { resetCurrentTransferState } from "../model/transfer-slice";
 
 type TransferHistoryProps = {
   transfers: Tranfser[];
 };
 
 export const TransferHistory = ({ transfers }: TransferHistoryProps) => {
-  const currentTransferInfo = useSelector(selectCurrentTransfer)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const currentTransferInfo = useSelector(selectCurrentTransfer);
+  const closeTransferInfo = () => dispatch(resetCurrentTransferState());
 
   return (
     <>
       <TransferHistoryContainer>
         <Stack small>
           {transfers.map((transfer) => (
-            <Transfer key={transfer.id} onClick={() => dispatch(fetchingTranferById(transfer.id))} >
+            <Transfer key={transfer.id} onClick={() => dispatch(fetchingTranferById(transfer.id))}>
               <Inline medium align-items="center">
                 <DateContainer>
                   <Text align="center">{transfer.date}</Text>
@@ -33,8 +35,9 @@ export const TransferHistory = ({ transfers }: TransferHistoryProps) => {
         </Stack>
       </TransferHistoryContainer>
 
-      {currentTransferInfo.entity && <TransferInfo transfer={currentTransferInfo.entity} />}
-
+      {currentTransferInfo.entity && (
+        <TransferInfo transfer={currentTransferInfo.entity} closeTransferInfo={closeTransferInfo} />
+      )}
     </>
   );
 };
@@ -54,17 +57,17 @@ const isReplenishOperation = (transfer: Tranfser) =>
       </TransferItem>
     </>
   ) : (
-      <>
-        <TransferItem>
-          <Text>{transfer.recipient_login}</Text>
-        </TransferItem>
-        <TransferItem>
-          <Text color="#ce0000" fs="1.4rem">
-            -{transfer.amount} ₽
+    <>
+      <TransferItem>
+        <Text>{transfer.recipient_login}</Text>
+      </TransferItem>
+      <TransferItem>
+        <Text color="#ce0000" fs="1.4rem">
+          -{transfer.amount} ₽
         </Text>
-        </TransferItem>
-      </>
-    );
+      </TransferItem>
+    </>
+  );
 
 const TransferHistoryContainer = styled.ul`
   display: flex;
@@ -84,6 +87,10 @@ const Transfer = styled.li`
   height: 100px;
   padding: 0.5rem 1rem;
   cursor: pointer;
+
+  &:hover {
+    background: #d0c5ea;
+  }
 `;
 
 const TransferItem = styled.div`
