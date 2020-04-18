@@ -14,7 +14,7 @@ export const TransferHistory = ({ transfers }: TransferHistoryProps) => {
       <Stack small>
         {transfers.map((transfer) => (
           <Transfer key={transfer.id}>
-            <Inline medium display="flex" align-items="center">
+            <Inline medium align-items="center">
               <DateContainer>
                 <Text align="center">{transfer.date}</Text>
               </DateContainer>
@@ -37,7 +37,7 @@ const isReplenishOperation = (transfer: Tranfser) =>
       </TransferItem>
       <TransferItem>
         <Text color="#1e7100" fs="1.2rem">
-          +{transfer.amount}
+          +{transfer.amount} ₽
         </Text>
       </TransferItem>
     </>
@@ -48,7 +48,7 @@ const isReplenishOperation = (transfer: Tranfser) =>
       </TransferItem>
       <TransferItem>
         <Text color="#ce0000" fs="1.2rem">
-          -{transfer.amount}
+          -{transfer.amount} ₽
         </Text>
       </TransferItem>
     </>

@@ -10,6 +10,8 @@ type StackProps = {
 
 export const Stack = styled.div<StackProps>`
   width: 100%;
+  display: flex;
+  flex-direction: column;
 
   & > * + * {
     margin-top: ${({ space }) => space};

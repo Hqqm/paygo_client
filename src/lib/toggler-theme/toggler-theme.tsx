@@ -1,7 +1,9 @@
 import * as React from "react";
+import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "root-reducer";
 import { setTheme, setThemeInLocalStorage } from "./toggler-theme-slice";
+import { Button } from "@ui/atoms";
 
 export const TogglerTheme = () => {
   React.useEffect(() => {
@@ -9,16 +11,13 @@ export const TogglerTheme = () => {
     if (currentTheme === localTheme && localTheme !== null) return;
 
     const preferUserColorSchemeIsDark =
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
+      window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 
     if (preferUserColorSchemeIsDark && !localTheme) {
       setMode("dark");
     }
 
-    localTheme !== null
-      ? dispatch(setTheme({ mode: localTheme }))
-      : setMode("light");
+    localTheme !== null ? dispatch(setTheme({ mode: localTheme })) : setMode("light");
   }, []);
 
   const dispatch = useDispatch();
@@ -33,5 +32,18 @@ export const TogglerTheme = () => {
     currentTheme === "dark" ? setMode("light") : setMode("dark");
   };
 
-  return <button onClick={toggleTheme}>оп</button>;
+  return <StyledThemeToggler onClick={toggleTheme}>сменить тему</StyledThemeToggler>;
 };
+
+const StyledThemeToggler = styled.button`
+  width: 100%;
+  border: none;
+  background: #fff;
+  font-size: calc(14px + 0.4vw);
+  cursor: pointer;
+  padding: 22px;
+
+  &:hover {
+    color: #9262fd;
+  }
+`;

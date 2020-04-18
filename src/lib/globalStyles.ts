@@ -25,6 +25,7 @@ export const GlobalStyles = createGlobalStyle`
     height: 100vh;
     margin: 0;
     padding: 0;
+    font-size: 1rem;
     font-family: 'PT Sans', sans-serif;
     line-height: 1.5;
   }`;

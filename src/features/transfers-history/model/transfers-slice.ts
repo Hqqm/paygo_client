@@ -10,7 +10,9 @@ const initialState: TranfersState = {
 const tranfserSlice = createSlice({
   name: "tranfers",
   initialState,
-  reducers: {},
+  reducers: {
+    resetTransferHistoryState: () => initialState,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchingTranfers.pending, (state) => {
@@ -26,4 +28,7 @@ const tranfserSlice = createSlice({
   },
 });
 
-export const { reducer } = tranfserSlice;
+export const {
+  reducer,
+  actions: { resetTransferHistoryState },
+} = tranfserSlice;

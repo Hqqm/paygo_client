@@ -49,6 +49,7 @@ export const ReplenishBalancePage = () => (
 const Main = styled.main`
   display: flex;
   flex-direction: column;
+  width: 100%;
   height: 100%;
 `;
 
@@ -56,7 +57,8 @@ const ReplenishFormContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  height: 100%;
+  box-shadow: 0 27px 85px -5px rgba(0, 0, 0, 0.15);
   padding: 2.5rem 1.5rem;
   border-radius: 20px;
 `;

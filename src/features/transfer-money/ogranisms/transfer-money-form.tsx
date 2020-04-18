@@ -81,7 +81,7 @@ const useEnhanseTransferMoneyForm = () => {
 
 const FormContainer = styled.div`
   min-width: 450px;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 27px 85px -5px rgba(0, 0, 0, 0.15);
   padding: 2.5rem 1.5rem;
   border-radius: 20px;
 `;

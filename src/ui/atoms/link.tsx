@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link as RouterLink, NavLink, NavLinkProps } from "react-router-dom";
 
 export const Link = styled(RouterLink)`
-  color: #fff;
+  color: #000000;
   font-size: calc(14px + 0.4vw);
   text-decoration: none;
   &:hover {
@@ -16,6 +16,7 @@ export const NavBarLink = styled(NavLink)`
   font-size: calc(14px + 0.4vw);
   color: #000000;
   text-decoration: none;
+
   &:hover {
     color: #9262fd;
     text-decoration: underline;
