@@ -18,4 +18,5 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 2rem;
+  width: 100%;  
 `;

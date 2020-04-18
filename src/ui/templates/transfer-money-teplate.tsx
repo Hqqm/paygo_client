@@ -23,5 +23,4 @@ const MainContainer = styled.div`
   display: flex;
   flex-grow: 1;
   justify-content: center;
-  font-size: calc(14px + 2vw);
 `;
