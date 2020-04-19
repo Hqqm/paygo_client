@@ -16,6 +16,7 @@ type InputProps = {
   register: (
     ref: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | CustomElement | null
   ) => void;
+  onFocus?: ((event: React.FocusEvent<HTMLInputElement>) => void) | undefined;
 };
 
 export const Input = ({
@@ -28,6 +29,7 @@ export const Input = ({
   errors,
   errMapper,
   register,
+  onFocus,
 }: InputProps) => (
   <ContainerInput>
     <Box pb={"xs"} pl={"xss"}>
@@ -46,6 +48,7 @@ export const Input = ({
       inputMode={inputmode}
       errors={errors}
       aria-label={ariaLabel}
+      onFocus={onFocus}
     />
 
     {errors && (

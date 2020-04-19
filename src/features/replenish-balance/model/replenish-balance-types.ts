@@ -4,7 +4,10 @@ export type ReplenishRequestData = {
 };
 
 export type ReplenishBalanceFormData = {
-  cardNumber: string;
+  number: string;
+  name: string;
+  expiry: string;
+  cvc: string;
   amount: string;
 };
 

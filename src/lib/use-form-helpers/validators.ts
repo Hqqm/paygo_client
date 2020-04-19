@@ -34,3 +34,24 @@ export const cardValidator = () => ({
     isEmpty: (value: string) => value.length > 0,
   },
 });
+
+export const fullNameValidator = () => ({
+  pattern: /[a-z]/,
+  validate: {
+    isEmpty: (value: string) => value.length > 0,
+  },
+});
+
+export const expiryValidator = () => ({
+  pattern: /[0-9]/,
+  validate: {
+    isEmpty: (value: string) => value.length > 0,
+  },
+});
+
+export const cvcValidator = () => ({
+  pattern: /[0-9]/,
+  validate: {
+    isEmpty: (value: string) => value.length > 0,
+  },
+});
