@@ -10,6 +10,7 @@ type InlineProps = {
 };
 
 export const Inline = styled(Box)<InlineProps>`
+  display: flex;
   width: 100%;
   & > * + * {
     margin-left: ${({ space }) => space};

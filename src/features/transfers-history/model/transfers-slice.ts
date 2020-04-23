@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TranfersState } from "./transfers-types";
+import { TranfersState } from "./types";
 import { fetchingTranfers } from "./transfers-effects";
 
 const initialState: TranfersState = {
@@ -7,10 +7,12 @@ const initialState: TranfersState = {
   loading: "idle",
 };
 
-const tranfserSlice = createSlice({
-  name: "tranfers",
+const transferSlice = createSlice({
+  name: "transfers",
   initialState,
-  reducers: {},
+  reducers: {
+    resetTransferHistoryState: () => initialState,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchingTranfers.pending, (state) => {
@@ -26,4 +28,7 @@ const tranfserSlice = createSlice({
   },
 });
 
-export const { reducer } = tranfserSlice;
+export const {
+  reducer,
+  actions: { resetTransferHistoryState },
+} = transferSlice;

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Tranfser } from "./transfers-types";
+import { Tranfser } from "./types";
 
 export const fetchingTranfers = createAsyncThunk("tranfsers/fetchingTranfers", async () => {
   const response = await fetch("/server/api/transfersHistory", {

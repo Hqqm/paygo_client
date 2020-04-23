@@ -1,6 +1,6 @@
 import { combineReducers, ThunkAction, Action } from "@reduxjs/toolkit";
 
-import { reducer as transfersReducer } from "@features/transfers-history/model/transfers-slice";
+import { transfersRootReducer } from "@features/transfers-history/transfer-root-reducer";
 import { reducer as signInReducer } from "pages/sign-in/model/sign-in-slice";
 import { reducer as replenishBalanceReducer } from "@features/replenish-balance/model/replenish-balance-slice";
 import { reducer as transferMoneyReducer } from "@features/transfer-money/model/transfer-money-slice";
@@ -9,7 +9,7 @@ import { reducer as sessionReducer } from "@features/shared/session/slice";
 import { reducer as themeReducer } from "@lib/toggler-theme/toggler-theme-slice";
 
 export const rootReducer = combineReducers({
-  transfers: transfersReducer,
+  transfers: transfersRootReducer,
   session: sessionReducer,
   replenishBalance: replenishBalanceReducer,
   transferMoney: transferMoneyReducer,

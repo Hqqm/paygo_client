@@ -1,32 +1,35 @@
 import * as React from "react";
-import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { TogglerTheme } from "@lib/toggler-theme/toggler-theme";
+import { useSelector } from "react-redux";
 import { selectIsAccountAuthenticated } from "../session/selectors";
-import { exitFromAccount } from "../session/services/utils";
 import { selectAccount } from "../account/selectors";
 import { Link, NavBarLink } from "@ui/atoms";
+import { AuthenticatedAccount } from "./auth-account";
 
 const logoSvg = require("public/logo.svg");
 
 export const Header = () => {
   const isAccountAuthenticated = useSelector(selectIsAccountAuthenticated);
+  const account = useSelector(selectAccount);
 
   return (
     <StyledHeader>
       <Link to="/">
         <img src={logoSvg} alt="paygo logo" />
       </Link>
-      {isAccountAuthenticated ? <AuthenticatedNavbar /> : <GuestNavbar />}
-      <TogglerTheme />
+      {isAccountAuthenticated && account ? (
+        <>
+          <AuthenticatedNavbar />
+          <AuthenticatedAccount account={account} />
+        </>
+      ) : (
+        <GuestNavbar />
+      )}
     </StyledHeader>
   );
 };
 
 const AuthenticatedNavbar = () => {
-  const account = useSelector(selectAccount);
-  const dispatch = useDispatch();
-
   return (
     <NavBar>
       <Ul>
@@ -35,28 +38,29 @@ const AuthenticatedNavbar = () => {
           <NavBarLink to="/replenishBalance">пополнить баланс</NavBarLink>
         </Li>
         <Li>
-          <NavBarLink to="/transferMoney">перевести деньги</NavBarLink>
+          <NavBarLink to="/transferMoney">переводы</NavBarLink>
         </Li>
         &nbsp;
         <Li>
-          <NavBarLink to="/tranfersHistory">история переводов</NavBarLink>
+          <NavBarLink to="/tranfersHistory">история</NavBarLink>
         </Li>
         &nbsp;
-        <Li>
-          <NavBarLink to="/">
-            {account!.login}&nbsp;{account!.balance}
-          </NavBarLink>
-        </Li>
-        &nbsp;
-        <Li>
-          <NavBarLink to="/" onClick={() => exitFromAccount(dispatch)}>
-            выйти
-          </NavBarLink>
-        </Li>
       </Ul>
     </NavBar>
   );
 };
+
+/*
+<Li>
+          <NavBarLink to="/">
+          
+          </NavBarLink>
+        </Li>
+        &nbsp;
+        <Li>
+  
+        </Li>
+        */
 
 const GuestNavbar = () => (
   <NavBar>
